@@ -4,8 +4,19 @@
  */
 package form.books;
 
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import form.table.TableActionCellEditor;
+import form.table.TableActionCellRender;
+import form.table.TableActionEvent;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +29,35 @@ public class BookList extends javax.swing.JFrame {
      */
     public BookList() {
         initComponents();
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                System.out.println("Edit row: " + row);
+                String id = booktitlelist.getModel().getValueAt(row, 0).toString();
+                System.out.println(id);
+            }
+
+            @Override
+            public void onView(int row) {
+                System.out.println("View row: " + row);
+                String id = booktitlelist.getModel().getValueAt(row, 0).toString();
+                System.out.println(id);
+            }
+
+            @Override
+            public void onDelete(int row) {
+                String id = booktitlelist.getModel().getValueAt(row, 0).toString();
+                System.out.println(id);
+                if (booktitlelist.isEditing()) {
+                    booktitlelist.getCellEditor().stopCellEditing();
+                }
+                DefaultTableModel model = (DefaultTableModel) booktitlelist.getModel();
+                model.removeRow(row);
+            }
+        };
+        booktitlelist.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
+        booktitlelist.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
+        fetchBookTitle();
     }
 
     /**
@@ -30,23 +70,30 @@ public class BookList extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        booktitlelist = new javax.swing.JTable();
         addBookButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        booktitlelist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Tiêu đề sách", "Năm xuất bản", "Hành động"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        booktitlelist.setRowHeight(40);
+        booktitlelist.setSelectionBackground(new java.awt.Color(102, 255, 204));
+        jScrollPane1.setViewportView(booktitlelist);
 
         addBookButton.setText("Thêm sách mới");
         addBookButton.addActionListener(new java.awt.event.ActionListener() {
@@ -72,13 +119,38 @@ public class BookList extends javax.swing.JFrame {
                 .addContainerGap(82, Short.MAX_VALUE)
                 .addComponent(addBookButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void fetchBookTitle() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
+            ResultSet rs = c.createStatement().executeQuery("SELECT id, booktitle, publishedyear FROM booktitle");
+            ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+            DefaultTableModel model = (DefaultTableModel) booktitlelist.getModel();
+            String ID;
+            String booktitle;
+            String publishedyear;
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                ID = String.valueOf(id);
+                booktitle = rs.getString(2);
+                publishedyear = rs.getString(3);
+                String[] row = {ID, booktitle, publishedyear};
+                model.addRow(row);
+            }
+            c.close();
+            
+                  
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
@@ -127,7 +199,7 @@ public class BookList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBookButton;
+    private javax.swing.JTable booktitlelist;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
