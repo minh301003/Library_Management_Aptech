@@ -124,7 +124,7 @@ public class CreateBook extends javax.swing.JFrame {
                     .addComponent(publishedyear)
                     .addComponent(publishername, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
-                .addContainerGap(436, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(createBookTitle)
@@ -191,7 +191,7 @@ public class CreateBook extends javax.swing.JFrame {
         }
     } 
     
-   private DefaultListModel genreModel;
+    private DefaultListModel genreModel;
     private void fetchGenre() {
         genreModel = new DefaultListModel();
         try {
@@ -335,7 +335,7 @@ public class CreateBook extends javax.swing.JFrame {
             }
             
             //Refresh form and show successful alert
-            JOptionPane.showMessageDialog(this, "Add book title successfully!");
+            JOptionPane.showMessageDialog(this, "Thêm sách thành công");
             booktitle.setText("");
             publishedyear.setText("");
             author.setText("");

@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,30 +30,32 @@ public class BookList extends javax.swing.JFrame {
      */
     public BookList() {
         initComponents();
-        TableActionEvent event = new TableActionEvent() {
+        TableActionEvent event;
+        event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 System.out.println("Edit row: " + row);
-                String id = booktitlelist.getModel().getValueAt(row, 0).toString();
-                System.out.println(id);
+                
             }
 
             @Override
             public void onView(int row) {
-                System.out.println("View row: " + row);
                 String id = booktitlelist.getModel().getValueAt(row, 0).toString();
-                System.out.println(id);
+                close(); 
+                ViewBook viewBook = new ViewBook(id);
+                viewBook.setVisible(true);
             }
 
             @Override
             public void onDelete(int row) {
                 String id = booktitlelist.getModel().getValueAt(row, 0).toString();
-                System.out.println(id);
                 if (booktitlelist.isEditing()) {
                     booktitlelist.getCellEditor().stopCellEditing();
                 }
                 DefaultTableModel model = (DefaultTableModel) booktitlelist.getModel();
                 model.removeRow(row);
+                deleleBookTitleByID(id);
+                
             }
         };
         booktitlelist.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
@@ -147,6 +150,16 @@ public class BookList extends javax.swing.JFrame {
             c.close();
             
                   
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void deleleBookTitleByID(String id) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
+            c.createStatement().executeUpdate("DELETE FROM booktitle WHERE id = " + id);
+            JOptionPane.showMessageDialog(this, "Xóa sách thành công!");
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
         }
