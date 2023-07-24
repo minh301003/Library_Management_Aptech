@@ -5,7 +5,6 @@
 package form.books;
 
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
-import form.table.TableActionCellEditor;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -16,7 +15,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 import static utils.Database.connectDB;
 

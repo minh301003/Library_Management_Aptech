@@ -335,7 +335,7 @@ public class CreateBook extends javax.swing.JFrame {
             }
             
             //Refresh form and show successful alert
-            JOptionPane.showMessageDialog(this, "Thêm sách thành công");
+            JOptionPane.showMessageDialog(this, "Thêm sách thành công!");
             booktitle.setText("");
             publishedyear.setText("");
             author.setText("");
