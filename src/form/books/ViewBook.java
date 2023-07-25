@@ -8,7 +8,6 @@ import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,8 +52,7 @@ public class ViewBook extends javax.swing.JFrame {
     
     private void fetchBookTitleByID() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
+           Connection conn = connectDB();
             PreparedStatement bookTitleByID = conn.prepareStatement("SELECT * FROM booktitle WHERE id = ?");
             bookTitleByID.setString(1, this.ID);
             ResultSet bookTitleInfo = bookTitleByID.executeQuery();
@@ -141,8 +139,8 @@ public class ViewBook extends javax.swing.JFrame {
                 }
             }
             conn.close();
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewBook.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
 

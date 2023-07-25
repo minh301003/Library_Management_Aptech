@@ -5,6 +5,8 @@
 package form.borrow;
 
 import static form.users.UserList.getUserList;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,6 +23,7 @@ import javax.swing.JTextField;
 import model.User;
 
 import utils.Database;
+import static utils.Database.connectDB;
 
 /**
  *
@@ -76,11 +79,11 @@ public class CreateBorrow extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         createborrowbutton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelbutton = new javax.swing.JButton();
 
         jRadioButton1.setText("jRadioButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Phiếu mượn sách");
 
@@ -242,10 +245,10 @@ public class CreateBorrow extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Hủy");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancelbutton.setText("Hủy");
+        cancelbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancelbuttonActionPerformed(evt);
             }
         });
 
@@ -278,7 +281,7 @@ public class CreateBorrow extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(createborrowbutton)
                         .addGap(27, 27, 27)
-                        .addComponent(jButton2)
+                        .addComponent(cancelbutton)
                         .addGap(55, 55, 55))))
         );
         layout.setVerticalGroup(
@@ -299,24 +302,30 @@ public class CreateBorrow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createborrowbutton)
-                    .addComponent(jButton2))
+                    .addComponent(cancelbutton))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    public void close() {
+        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
+    }
+    private void cancelbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbuttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        close();
+        BorrowList bl = new BorrowList();
+        bl.setVisible(true);
+        
+    }//GEN-LAST:event_cancelbuttonActionPerformed
 
     private String BookDetailID;
     //Get the book id detail and fetch book information
     private void bookdetailIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookdetailIDActionPerformed
         // TODO add your handling code here:
         try { 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
+            Connection c = connectDB();
             //Get book detail ID
             ResultSet serialNumberList = c.createStatement().executeQuery("SELECT id FROM bookdetail");
             while (serialNumberList.next()) {
@@ -352,7 +361,7 @@ public class CreateBorrow extends javax.swing.JFrame {
                 authorModel.addElement(authorInfo.getString("authorname"));
             }
             authorList.setModel(authorModel);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
            
         } 
@@ -413,11 +422,12 @@ public class CreateBorrow extends javax.swing.JFrame {
                 //Insert into borrow table
                 PreparedStatement borrowInsert = c.prepareStatement("INSERT INTO borrow (bookdetail_id, user_id, librarian_id, borrowdate, duedate) VALUES(?, ?, ?, DATE ?, DATE ?)");
                 borrowInsert.setInt(1, Integer.parseInt(BookDetailID));
+                PreparedStatement getUserId = c.prepareStatement("SELECT id FROM user WHERE name = ?");
+                getUserId.setString(1, name.getText());
+                ResultSet getUserIdKey = getUserId.executeQuery();
                 int userID = 0;
-                for (User u : userList) {
-                    if (u.getName().equals(name.getText())){
-                        userID = u.getId();
-                    }
+                while (getUserIdKey.next()) {
+                   userID = getUserIdKey.getInt("id");
                 }
                 borrowInsert.setInt(2, userID);
                 borrowInsert.setInt(3, 1);
@@ -498,10 +508,10 @@ public class CreateBorrow extends javax.swing.JFrame {
     private javax.swing.JTextField bookstatus;
     private javax.swing.JTextField booktitle;
     private com.toedter.calendar.JDateChooser borrowdate;
+    private javax.swing.JButton cancelbutton;
     private javax.swing.JButton createborrowbutton;
     private com.toedter.calendar.JDateChooser duedate;
     private javax.swing.JTextField email;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

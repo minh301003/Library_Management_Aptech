@@ -17,7 +17,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import static utils.Database.connectDB;
 
 /**
  *
@@ -75,6 +78,8 @@ public class BookList extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         booktitlelist = new javax.swing.JTable();
         addBookButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        searchfield = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -105,14 +110,27 @@ public class BookList extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Tìm kiếm");
+
+        searchfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchfieldKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addBookButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchfield, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addBookButton))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -120,7 +138,10 @@ public class BookList extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(82, Short.MAX_VALUE)
-                .addComponent(addBookButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBookButton)
+                    .addComponent(jLabel1)
+                    .addComponent(searchfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -131,27 +152,25 @@ public class BookList extends javax.swing.JFrame {
 
     private void fetchBookTitle() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
-            ResultSet rs = c.createStatement().executeQuery("SELECT id, booktitle, publishedyear FROM booktitle");
-            ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
-            DefaultTableModel model = (DefaultTableModel) booktitlelist.getModel();
-            String ID;
-            String booktitle;
-            String publishedyear;
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                ID = String.valueOf(id);
-                booktitle = rs.getString(2);
-                publishedyear = rs.getString(3);
-                String[] row = {ID, booktitle, publishedyear};
-                model.addRow(row);
+            try (Connection c = connectDB()) {
+                ResultSet rs = c.createStatement().executeQuery("SELECT id, booktitle, publishedyear FROM booktitle");
+                DefaultTableModel model = (DefaultTableModel) booktitlelist.getModel();
+                String ID;
+                String booktitle;
+                String publishedyear;
+                while (rs.next()) {
+                    int id = rs.getInt(1);
+                    ID = String.valueOf(id);
+                    booktitle = rs.getString(2);
+                    publishedyear = rs.getString(3);
+                    String[] row = {ID, booktitle, publishedyear};
+                    model.addRow(row);
+                }
             }
-            c.close();
             
                   
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void deleleBookTitleByID(String id) {
@@ -161,7 +180,7 @@ public class BookList extends javax.swing.JFrame {
             c.createStatement().executeUpdate("DELETE FROM booktitle WHERE id = " + id);
             JOptionPane.showMessageDialog(this, "Xóa sách thành công!");
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void close() {
@@ -174,6 +193,17 @@ public class BookList extends javax.swing.JFrame {
         CreateBook createBook = new CreateBook();
         createBook.setVisible(true);
     }//GEN-LAST:event_addBookButtonActionPerformed
+    private void search(String key) {
+        DefaultTableModel model = (DefaultTableModel) booktitlelist.getModel();
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(model);
+        booktitlelist.setRowSorter(trs);
+        trs.setRowFilter(RowFilter.regexFilter(key));
+    }
+    private void searchfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchfieldKeyReleased
+        // TODO add your handling code here:
+        String searchKey = searchfield.getText();
+        search(searchKey);
+    }//GEN-LAST:event_searchfieldKeyReleased
     
     
         
@@ -213,6 +243,8 @@ public class BookList extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBookButton;
     private javax.swing.JTable booktitlelist;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField searchfield;
     // End of variables declaration//GEN-END:variables
 }

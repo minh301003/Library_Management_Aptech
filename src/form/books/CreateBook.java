@@ -179,14 +179,13 @@ public class CreateBook extends javax.swing.JFrame {
 
     private void fetchPublisher() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
+            Connection c = connectDB();
             ResultSet publisherList = c.createStatement().executeQuery("Select publishername from publisher");
             while (publisherList.next()) {
                 String publisher = publisherList.getString("publishername");
                 publishername.addItem(publisher);
             }
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
