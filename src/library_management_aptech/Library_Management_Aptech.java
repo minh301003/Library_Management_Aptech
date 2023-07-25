@@ -3,8 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package library_management_aptech;
-import form.borrow.BorrowList;
-import form.borrow.CreateBorrow;
+import form.dashboard.DashBoard;
 import static utils.Database.*;
 
 
@@ -20,8 +19,8 @@ public class Library_Management_Aptech {
     public static void main(String[] args) {
         // TODO code application logic here
           connectDB();
-           BorrowList b = new  BorrowList();
-            b.setVisible(true);
+          DashBoard dashBoard = new DashBoard();
+          dashBoard.setVisible(true);
         
     }
     
