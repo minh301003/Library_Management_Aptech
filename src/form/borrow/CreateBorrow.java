@@ -451,6 +451,7 @@ public class CreateBorrow extends javax.swing.JFrame {
                 name.setText("");
                 email.setText("");
                 phone.setText("");
+               
             }
                     
         } catch (ClassNotFoundException | SQLException ex) {

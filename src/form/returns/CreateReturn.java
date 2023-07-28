@@ -13,15 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import model.BookDamageRule;
 import static model.BookDamageRule.getBookDamageRule;
 import model.ReturnBookRule;
@@ -47,8 +43,8 @@ public class CreateReturn extends javax.swing.JFrame {
     private int BookStatusBeforeBorrow;
     private int BookStatusAfterBorrow;
     private String Action;
-    private int FineReturnLate;
-    private int FineBookDamage;
+    private int FineReturnLate = 0;
+    private int FineBookDamage = 0;
     
     
    
@@ -449,18 +445,59 @@ public class CreateReturn extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmReturnButtonMouseEntered
 
     private void confirmReturnButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmReturnButtonMouseExited
-        Color color = new Color(0,51,51);
+        Color color = new Color(0,102,102);
         confirmReturnButton.setBackground(color);
     }//GEN-LAST:event_confirmReturnButtonMouseExited
     // Return book action
     private void confirmReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmReturnButtonActionPerformed
-//        try {
-//            Connection c = connectDB();
-//            BookStatus = (String)bookStatus.getSelectedItem().toString();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-//           
-//        } 
+        try {
+            Connection c = connectDB();
+            //Action according to bookdamagerule
+            if ("Bỏ sách".equals(Action)) {
+                c.createStatement().executeUpdate("DELETE FROM bookdetail WHERE id = " + BookDetailID);
+                JOptionPane.showMessageDialog(this, "Sách này bị xóa khỏi thư viện do bị hỏng nặng");
+            } else {
+                //Insert into return table
+                PreparedStatement returnInsertStatement = 
+                c.prepareStatement("INSERT INTO returnn (bookdetail_id, user_id, librarian_id, returndate, bookstatus, fine) VALUES(?, ?, ?, DATE ?, ?, ?)");
+                returnInsertStatement.setInt(1, Integer.parseInt(BookDetailID));
+                returnInsertStatement.setInt(2, Integer.parseInt(UserID));
+                returnInsertStatement.setInt(3, 1);
+                String pattern = "yyyy-MM-dd";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                String date = simpleDateFormat.format(new Date());
+                returnInsertStatement.setString(4, date);
+                System.out.println(date);
+                returnInsertStatement.setInt(5, BookStatusAfterBorrow);
+                int finalFine = FineReturnLate + FineBookDamage;
+                returnInsertStatement.setInt(6, finalFine);
+                System.out.println(finalFine);
+                returnInsertStatement.executeUpdate();
+                //Update return status in borrow table
+                PreparedStatement updateReturnStatement = c.prepareStatement("UPDATE borrow SET returnstatus = 1 WHERE bookdetail_id = ? AND user_id = ? AND returnstatus = 0");
+                updateReturnStatement.setInt(1, Integer.parseInt(BookDetailID));
+                updateReturnStatement.setInt(2, Integer.parseInt(UserID));
+                updateReturnStatement.executeUpdate();
+                //Update book status in book detail table
+                PreparedStatement updateBookStatusStatement = c.prepareStatement("UPDATE bookdetail SET bookstatus = ? WHERE id = ?");
+                updateBookStatusStatement.setInt(1, BookStatusAfterBorrow);
+                updateBookStatusStatement.setInt(2, Integer.parseInt(BookDetailID));
+                updateBookStatusStatement.executeUpdate();
+                //Refresh form and show successful alert
+                JOptionPane.showMessageDialog(this, "Ghi nhận trả sách thành công!");
+                bookTitle.setText("");
+                bookPart.setText("");
+                userName.setText("");
+                librarianName.setText("");
+                fineReturnLate.setText("");
+                fineBookDamage.setText("");
+                note1.setText("");
+                note2.setText("");       
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+           
+        } 
     }//GEN-LAST:event_confirmReturnButtonActionPerformed
     
     //Find the borrow information
@@ -577,7 +614,6 @@ public class CreateReturn extends javax.swing.JFrame {
                 note1.setText(bookDamageNote);
                 //get the action
                 Action = bdr.getAction();
-                
                 }
             }
         }   
