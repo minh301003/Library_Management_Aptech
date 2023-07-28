@@ -4,6 +4,17 @@
  */
 package library_management_aptech;
 import form.dashboard.DashBoard;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.ReturnBookRule;
+import static model.ReturnBookRule.getReturnBookRule;
+import utils.Database;
 import static utils.Database.*;
 
 
@@ -17,10 +28,14 @@ public class Library_Management_Aptech {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-          connectDB();
-          DashBoard dashBoard = new DashBoard();
-          dashBoard.setVisible(true);
+    
+        connectDB();
+        DashBoard dashBoard = new DashBoard();
+        dashBoard.setVisible(true);
+        
+        
+
+        
         
     }
     

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import model.Librarian;
 import model.User;
 import utils.Database;
+import static utils.Database.connectDB;
 
 /**
  *
@@ -33,15 +34,14 @@ public class LibrarianList extends javax.swing.JFrame {
      public static List<Librarian> getLibrarianList(){
         List<Librarian> ls = new ArrayList<>();
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Librarian");
+           Connection c = connectDB();
+            PreparedStatement stmt = c.prepareStatement("SELECT * FROM Librarian");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 Librarian librarian = new Librarian(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
                 ls.add(librarian);
             }
-        }catch (ClassNotFoundException | SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
            
         } 

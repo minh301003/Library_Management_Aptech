@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
 import utils.Database;
+import static utils.Database.connectDB;
 
 /**
  *
@@ -32,15 +33,14 @@ public class UserList extends javax.swing.JFrame {
     public static List<User> getUserList(){
         List<User> ls = new ArrayList<>();
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
+           Connection conn = connectDB();
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 User user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
                 ls.add(user);
             }
-        }catch (ClassNotFoundException | SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
            
         } 
