@@ -61,7 +61,7 @@ public class DashBoard extends javax.swing.JFrame {
         returnlist.setBackground(new java.awt.Color(255, 255, 255));
         returnlist.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         returnlist.setForeground(new java.awt.Color(255, 255, 255));
-        returnlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/view all record.png"))); // NOI18N
+        returnlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow-96-64.png"))); // NOI18N
         returnlist.setText(" Quản lý trả sách");
         returnlist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -84,7 +84,7 @@ public class DashBoard extends javax.swing.JFrame {
         booklist.setBackground(new java.awt.Color(255, 255, 255));
         booklist.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         booklist.setForeground(new java.awt.Color(255, 255, 255));
-        booklist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/home.png"))); // NOI18N
+        booklist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/book-stack-64.png"))); // NOI18N
         booklist.setText("Quản lý kho sách");
         booklist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -107,8 +107,8 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/admin.png"))); // NOI18N
-        jLabel4.setText("Quản lý thủ thư");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/contacts-64.png"))); // NOI18N
+        jLabel4.setText("Quản lý nhân viên");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel4MouseEntered(evt);
@@ -117,7 +117,7 @@ public class DashBoard extends javax.swing.JFrame {
                 jLabel4MouseExited(evt);
             }
         });
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, 80));
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 250, 80));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 270, 120));
 
@@ -170,8 +170,8 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/new-user.png"))); // NOI18N
-        jLabel8.setText("Quản lý người dùng");
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user-5-64.png"))); // NOI18N
+        jLabel8.setText("Quản lý người mượn");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel8MouseEntered(evt);
@@ -180,7 +180,7 @@ public class DashBoard extends javax.swing.JFrame {
                 jLabel8MouseExited(evt);
             }
         });
-        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 250, 70));
+        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, 70));
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, 270, 120));
 
@@ -214,7 +214,7 @@ public class DashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_returnlistMouseExited
 
     private void booklistMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_booklistMouseEntered
-        // TODO add your handling code here:
+
          Color color = new Color(0,51,51);
         jPanel4.setBackground(color);
     }//GEN-LAST:event_booklistMouseEntered

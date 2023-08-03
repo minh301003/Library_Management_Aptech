@@ -4,7 +4,13 @@
  */
 package form.borrow;
 
+import form.books.BookList;
+import form.dashboard.DashBoard;
+import form.librarians.LibrarianList;
+import form.returns.ReturnList;
+import form.users.UserList;
 import static form.users.UserList.getUserList;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -51,263 +57,450 @@ public class CreateBorrow extends javax.swing.JFrame {
     private void initComponents() {
 
         jRadioButton1 = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        cancelbutton = new javax.swing.JButton();
+        createborrowbutton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        bookdetailID = new form.suggestion_combo.ComboBoxSuggestion();
-        jLabel4 = new javax.swing.JLabel();
-        booktitle = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         bookpart = new javax.swing.JTextField();
         bookstatus = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        booktitle = new javax.swing.JTextField();
+        bookdetailID = new form.suggestion_combo.ComboBoxSuggestion();
         jLabel13 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         authorList = new javax.swing.JList<>();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         phone = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         duedate = new com.toedter.calendar.JDateChooser();
         borrowdate = new com.toedter.calendar.JDateChooser();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        createborrowbutton = new javax.swing.JButton();
-        cancelbutton = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        returnButton = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        dashboard = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        booklist = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        borrowlist = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        returnlist = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        librarianlist = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        userlist = new javax.swing.JLabel();
 
         jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Phiếu mượn sách");
+        jPanel4.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cancelbutton.setBackground(new java.awt.Color(0, 102, 102));
+        cancelbutton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cancelbutton.setForeground(new java.awt.Color(255, 255, 255));
+        cancelbutton.setText("Hủy");
+        cancelbutton.setBorder(null);
+        cancelbutton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cancelbuttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cancelbuttonMouseExited(evt);
+            }
+        });
+        cancelbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelbuttonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cancelbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 620, 115, 50));
+
+        createborrowbutton.setBackground(new java.awt.Color(0, 102, 102));
+        createborrowbutton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        createborrowbutton.setForeground(new java.awt.Color(255, 255, 255));
+        createborrowbutton.setText("Xác nhận");
+        createborrowbutton.setBorder(null);
+        createborrowbutton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                createborrowbuttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                createborrowbuttonMouseExited(evt);
+            }
+        });
+        createborrowbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createborrowbuttonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(createborrowbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 620, 115, 50));
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Mã Serial");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel6.setText("Phần");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+
+        bookpart.setEditable(false);
+        bookpart.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(bookpart, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 150, 30));
+
+        bookstatus.setEditable(false);
+        bookstatus.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(bookstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 150, 30));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel7.setText("Trạng thái sách");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel4.setText("Tiêu đề sách");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        booktitle.setEditable(false);
+        booktitle.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(booktitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 150, 30));
 
         bookdetailID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bookdetailIDActionPerformed(evt);
             }
         });
+        jPanel1.add(bookdetailID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 150, 30));
 
-        jLabel4.setText("Tiêu đề sách");
-
-        booktitle.setEditable(false);
-
-        jLabel6.setText("Phần");
-
-        bookpart.setEditable(false);
-
-        bookstatus.setEditable(false);
-
-        jLabel7.setText("Trạng thái sách");
-
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 153, 153));
         jLabel13.setText("Tác giả");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel2.setText("Mã Serial");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         jScrollPane1.setViewportView(authorList);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel13))
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bookdetailID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(booktitle)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                    .addComponent(bookpart)
-                    .addComponent(bookstatus))
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(bookdetailID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(booktitle, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bookpart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(bookstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(117, 117, 117))
-        );
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 150, 130));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel3.setText("Thông tin sách  ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+
+        jPanel5.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 480));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel9.setText("Tên người mượn");
-
-        jLabel10.setText("Email");
-
-        jLabel11.setText("Số điện thoại");
-
-        jLabel12.setText("Ngày trả");
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         duedate.setDateFormatString("yyyy-MM-dd");
         duedate.setMinSelectableDate(new java.util.Date());
 
         borrowdate.setDateFormatString("yyyy-MM-dd");
 
-        jLabel14.setText("Ngày mượn");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel5.setText("Thông tin người mượn");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel8.setText("Họ tên");
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel15.setText("Email");
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel16.setText("Số điện thoại");
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel17.setText("Ngày mượn");
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel18.setText("Ngày trả");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10)
+                        .addComponent(jLabel18)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(duedate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(borrowdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel12))
-                            .addComponent(jLabel14))
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(borrowdate, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                            .addComponent(phone)
-                            .addComponent(email)
-                            .addComponent(duedate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(49, 49, 49))
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                                .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(44, 44, 44))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLabel5)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(borrowdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(duedate, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(112, 112, 112))
-        );
-
-        jLabel3.setText("Thông tin sách");
-
-        jLabel8.setText("Thông tin mượn sách");
-
-        createborrowbutton.setText("Xác nhận");
-        createborrowbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createborrowbuttonActionPerformed(evt);
-            }
-        });
-
-        cancelbutton.setText("Hủy");
-        cancelbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelbuttonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(154, 154, 154))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(44, 44, 44))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createborrowbutton)
-                .addGap(52, 52, 52)
-                .addComponent(cancelbutton)
-                .addGap(80, 80, 80))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(456, 456, 456)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel8))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createborrowbutton)
-                    .addComponent(cancelbutton))
-                .addGap(180, 180, 180))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(jLabel17)
+                .addGap(18, 18, 18)
+                .addComponent(borrowdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel18)
+                .addGap(31, 31, 31)
+                .addComponent(duedate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
+
+        jPanel5.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 340, 480));
+
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 680, 480));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Ghi nhận mượn sách");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+
+        returnButton.setBackground(new java.awt.Color(0, 102, 102));
+        returnButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        returnButton.setForeground(new java.awt.Color(255, 255, 255));
+        returnButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/back1.png"))); // NOI18N
+        returnButton.setBorder(null);
+        returnButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                returnButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                returnButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                returnButtonMouseExited(evt);
+            }
+        });
+        jPanel4.add(returnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 80, 40));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 784, 768));
+
+        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel3MouseExited(evt);
+            }
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dashboard.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        dashboard.setForeground(new java.awt.Color(255, 255, 255));
+        dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/home-3-32.png"))); // NOI18N
+        dashboard.setText("Trang chủ");
+        dashboard.setIconTextGap(12);
+        dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dashboardMouseClicked(evt);
+            }
+        });
+        jPanel3.add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
+
+        jPanel6.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 240, 70));
+
+        jPanel7.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel7MouseExited(evt);
+            }
+        });
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        booklist.setBackground(new java.awt.Color(255, 255, 255));
+        booklist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        booklist.setForeground(new java.awt.Color(255, 255, 255));
+        booklist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/book-stack-32.png"))); // NOI18N
+        booklist.setText("Quản lý kho sách");
+        booklist.setIconTextGap(12);
+        booklist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                booklistMouseClicked(evt);
+            }
+        });
+        jPanel7.add(booklist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 240, 70));
+
+        jPanel8.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel8MouseExited(evt);
+            }
+        });
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        borrowlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        borrowlist.setForeground(new java.awt.Color(255, 255, 255));
+        borrowlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-2-32.png"))); // NOI18N
+        borrowlist.setText("Quản lý mượn sách");
+        borrowlist.setIconTextGap(12);
+        borrowlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                borrowlistMouseClicked(evt);
+            }
+        });
+        jPanel8.add(borrowlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jPanel6.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, 70));
+
+        jPanel9.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel9MouseExited(evt);
+            }
+        });
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        returnlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        returnlist.setForeground(new java.awt.Color(255, 255, 255));
+        returnlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow-96-32.png"))); // NOI18N
+        returnlist.setText("Quản lý trả sách");
+        returnlist.setIconTextGap(12);
+        returnlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                returnlistMouseClicked(evt);
+            }
+        });
+        jPanel9.add(returnlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 40));
+
+        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 240, 70));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/administrator-64.png"))); // NOI18N
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 70, 80));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Quản lý thư viện");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+
+        jPanel10.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel10MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel10MouseExited(evt);
+            }
+        });
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        librarianlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        librarianlist.setForeground(new java.awt.Color(255, 255, 255));
+        librarianlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/contacts-32.png"))); // NOI18N
+        librarianlist.setText("Quản lý nhân viên");
+        librarianlist.setIconTextGap(12);
+        librarianlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                librarianlistMouseClicked(evt);
+            }
+        });
+        jPanel10.add(librarianlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 180, 40));
+
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 240, 70));
+
+        jPanel11.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel11MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel11MouseExited(evt);
+            }
+        });
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        userlist.setForeground(new java.awt.Color(255, 255, 255));
+        userlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user-5-32.png"))); // NOI18N
+        userlist.setText("Quản lý người mượn");
+        userlist.setIconTextGap(12);
+        userlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userlistMouseClicked(evt);
+            }
+        });
+        jPanel11.add(userlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 200, 40));
+
+        jPanel6.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 240, 70));
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 768));
 
         pack();
         setLocationRelativeTo(null);
@@ -459,6 +652,139 @@ public class CreateBorrow extends javax.swing.JFrame {
            
         } 
     }//GEN-LAST:event_createborrowbuttonActionPerformed
+
+    private void returnButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnButtonMouseClicked
+        close();
+        BorrowList borrowList = new BorrowList();
+        borrowList.setVisible(true);
+    }//GEN-LAST:event_returnButtonMouseClicked
+
+    private void returnButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnButtonMouseEntered
+        Color color = new Color(0,51,51);
+        returnButton.setBackground(color);
+    }//GEN-LAST:event_returnButtonMouseEntered
+
+    private void returnButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnButtonMouseExited
+        Color color = new Color(0,102,102);
+        returnButton.setBackground(color);
+    }//GEN-LAST:event_returnButtonMouseExited
+
+    private void createborrowbuttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createborrowbuttonMouseEntered
+        Color color = new Color(0,51,51);
+        createborrowbutton.setBackground(color);
+    }//GEN-LAST:event_createborrowbuttonMouseEntered
+
+    private void cancelbuttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelbuttonMouseEntered
+        Color color = new Color(0,51,51);
+        cancelbutton.setBackground(color);
+    }//GEN-LAST:event_cancelbuttonMouseEntered
+
+    private void createborrowbuttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createborrowbuttonMouseExited
+        Color color = new Color(0,102,102);
+        createborrowbutton.setBackground(color);
+    }//GEN-LAST:event_createborrowbuttonMouseExited
+
+    private void cancelbuttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelbuttonMouseExited
+         Color color = new Color(0,102,102);
+        cancelbutton.setBackground(color);
+    }//GEN-LAST:event_cancelbuttonMouseExited
+
+    private void dashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardMouseClicked
+        close();
+        DashBoard db = new DashBoard();
+        db.setVisible(true);
+    }//GEN-LAST:event_dashboardMouseClicked
+
+    private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel3.setBackground(color);
+    }//GEN-LAST:event_jPanel3MouseEntered
+
+    private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
+        Color color = new Color(0,102,102);
+        jPanel3.setBackground(color);
+    }//GEN-LAST:event_jPanel3MouseExited
+
+    private void booklistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_booklistMouseClicked
+        close();
+        BookList bkl = new BookList();
+        bkl.setVisible(true);
+    }//GEN-LAST:event_booklistMouseClicked
+
+    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel7.setBackground(color);
+    }//GEN-LAST:event_jPanel7MouseEntered
+
+    private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
+        Color color = new Color(0,102,102);
+        jPanel7.setBackground(color);
+    }//GEN-LAST:event_jPanel7MouseExited
+
+    private void borrowlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrowlistMouseClicked
+        close();
+        BorrowList bl = new BorrowList();
+        bl.setVisible(true);
+
+    }//GEN-LAST:event_borrowlistMouseClicked
+
+    private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel8.setBackground(color);
+    }//GEN-LAST:event_jPanel8MouseEntered
+
+    private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
+        Color color = new Color(0,102,102);
+        jPanel8.setBackground(color);
+    }//GEN-LAST:event_jPanel8MouseExited
+
+    private void returnlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnlistMouseClicked
+        close();
+        ReturnList rl = new ReturnList();
+        rl.setVisible(true);
+    }//GEN-LAST:event_returnlistMouseClicked
+
+    private void jPanel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel9.setBackground(color);
+    }//GEN-LAST:event_jPanel9MouseEntered
+
+    private void jPanel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseExited
+        Color color = new Color(0,102,102);
+        jPanel9.setBackground(color);
+    }//GEN-LAST:event_jPanel9MouseExited
+
+    private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
+        close();
+        LibrarianList ll = new LibrarianList();
+        ll.setVisible(true);
+    }//GEN-LAST:event_librarianlistMouseClicked
+
+    private void jPanel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel10.setBackground(color);
+    }//GEN-LAST:event_jPanel10MouseEntered
+
+    private void jPanel10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseExited
+        Color color = new Color(0,102,102);
+        jPanel10.setBackground(color);
+    }//GEN-LAST:event_jPanel10MouseExited
+
+    private void userlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userlistMouseClicked
+        close();
+        UserList ul = new UserList();
+        ul.setVisible(true);
+    }//GEN-LAST:event_userlistMouseClicked
+
+    private void jPanel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel11.setBackground(color);
+    }//GEN-LAST:event_jPanel11MouseEntered
+
+    private void jPanel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseExited
+        Color color = new Color(0,102,102);
+        jPanel11.setBackground(color);
+    }//GEN-LAST:event_jPanel11MouseExited
     
     private void createBorrowForm() {
         try { 
@@ -516,20 +842,24 @@ public class CreateBorrow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> authorList;
     private form.suggestion_combo.ComboBoxSuggestion bookdetailID;
+    private javax.swing.JLabel booklist;
     private javax.swing.JTextField bookpart;
     private javax.swing.JTextField bookstatus;
     private javax.swing.JTextField booktitle;
     private com.toedter.calendar.JDateChooser borrowdate;
+    private javax.swing.JLabel borrowlist;
     private javax.swing.JButton cancelbutton;
     private javax.swing.JButton createborrowbutton;
+    private javax.swing.JLabel dashboard;
     private com.toedter.calendar.JDateChooser duedate;
     private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -539,10 +869,23 @@ public class CreateBorrow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel librarianlist;
     private javax.swing.JTextField name;
     private javax.swing.JTextField phone;
+    private javax.swing.JButton returnButton;
+    private javax.swing.JLabel returnlist;
+    private javax.swing.JLabel userlist;
     // End of variables declaration//GEN-END:variables
 }

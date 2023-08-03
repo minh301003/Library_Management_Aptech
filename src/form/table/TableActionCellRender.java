@@ -23,8 +23,6 @@ public class TableActionCellRender extends DefaultTableCellRenderer {
         } else {
             action.setBackground(com.getBackground());
         }
-        
-        
         return action;
     }
 }

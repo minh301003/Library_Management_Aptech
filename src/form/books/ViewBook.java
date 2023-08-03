@@ -5,6 +5,12 @@
 package form.books;
 
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import form.borrow.BorrowList;
+import form.dashboard.DashBoard;
+import form.librarians.LibrarianList;
+import form.returns.ReturnList;
+import form.users.UserList;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -156,26 +162,45 @@ public class ViewBook extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTextField3 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        bookdetaillist = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
-        booktitle = new javax.swing.JTextField();
-        publishername = new javax.swing.JTextField();
-        publishedyear = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
         part = new javax.swing.JTextField();
-        totalquantity = new javax.swing.JTextField();
-        backbutton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         genreList = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         authorList = new javax.swing.JList<>();
+        publishername = new javax.swing.JTextField();
+        publishedyear = new javax.swing.JTextField();
+        booktitle = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        totalquantity = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        returnButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        bookdetaillist = new form.table.Table();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        dashboard = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        booklist = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        borrowlist = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        returnlist = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        librarianlist = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        userlist = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,154 +218,311 @@ public class ViewBook extends javax.swing.JFrame {
         jTextField3.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Tiêu đề sách");
+        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Tác giả");
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setText("Năm xuất bản");
+        part.setEditable(false);
+        part.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.add(part, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 200, 30));
 
+        jScrollPane3.setViewportView(genreList);
+
+        jPanel9.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 200, 70));
+
+        jScrollPane4.setViewportView(authorList);
+
+        jPanel9.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 70));
+
+        publishername.setEditable(false);
+        publishername.setBackground(new java.awt.Color(255, 255, 255));
+        publishername.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jPanel9.add(publishername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
+
+        publishedyear.setEditable(false);
+        publishedyear.setBackground(new java.awt.Color(255, 255, 255));
+        publishedyear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        publishedyear.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jPanel9.add(publishedyear, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 200, 30));
+
+        booktitle.setEditable(false);
+        booktitle.setBackground(new java.awt.Color(255, 255, 255));
+        booktitle.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        booktitle.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        booktitle.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jPanel9.add(booktitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 200, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel3.setText("Thông tin sách  ");
+        jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Nhà xuất bản");
+        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
-        jLabel5.setText("Thể loại");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel5.setText("Tác giả");
+        jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
-        jLabel6.setText("Số phần");
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel7.setText("Năm xuất bản");
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, 20));
 
-        jLabel7.setText("Tổng số lượng sách");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel8.setText("Tiêu đề sách");
+        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel9.setText("Thể loại");
+        jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel10.setText("Số phần");
+        jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
+
+        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 680, 260));
+
+        totalquantity.setEditable(false);
+        totalquantity.setBackground(new java.awt.Color(0, 153, 153));
+        totalquantity.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        totalquantity.setForeground(new java.awt.Color(255, 255, 255));
+        totalquantity.setBorder(null);
+        totalquantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalquantityActionPerformed(evt);
+            }
+        });
+        jPanel2.add(totalquantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 410, 40, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Thông tin chi tiết");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+
+        returnButton.setBackground(new java.awt.Color(0, 102, 102));
+        returnButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        returnButton.setForeground(new java.awt.Color(255, 255, 255));
+        returnButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/back1.png"))); // NOI18N
+        returnButton.setBorder(null);
+        returnButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                returnButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                returnButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                returnButtonMouseExited(evt);
+            }
+        });
+        jPanel2.add(returnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 80, 40));
 
         bookdetaillist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã số Serial", "Tiêu đề sách", "Phần", "Tình trạng sách"
+                "Mã Serial sách", "Tiêu đề sách", "Phần", "Tình trạng sách"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        bookdetaillist.setRowHeight(40);
-        bookdetaillist.setSelectionBackground(new java.awt.Color(102, 255, 204));
-        jScrollPane2.setViewportView(bookdetaillist);
+        jScrollPane5.setViewportView(bookdetaillist);
 
-        jLabel8.setText("Danh sách cụ thể");
+        jPanel2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 680, 190));
 
-        booktitle.setEditable(false);
-        booktitle.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Tổng SL: ");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 410, -1, -1));
 
-        publishername.setEditable(false);
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Danh sách trong thư viện");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, -1, -1));
 
-        publishedyear.setEditable(false);
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 784, 768));
 
-        part.setEditable(false);
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        totalquantity.setEditable(false);
-
-        backbutton.setText("Quay lại");
-        backbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backbuttonActionPerformed(evt);
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel3MouseExited(evt);
             }
         });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane3.setViewportView(genreList);
+        dashboard.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        dashboard.setForeground(new java.awt.Color(255, 255, 255));
+        dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/home-3-32.png"))); // NOI18N
+        dashboard.setText("Trang chủ");
+        dashboard.setIconTextGap(12);
+        dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dashboardMouseClicked(evt);
+            }
+        });
+        jPanel3.add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
 
-        jScrollPane4.setViewportView(authorList);
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 240, 70));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane4)
-                                        .addComponent(booktitle, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(publishername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(part, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(totalquantity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(publishedyear, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(119, 119, 119)
-                        .addComponent(backbutton)
-                        .addGap(155, 155, 155))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 89, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(booktitle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backbutton)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(publishedyear, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(publishername, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(part, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(totalquantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
-        );
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel4MouseExited(evt);
+            }
+        });
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        booklist.setBackground(new java.awt.Color(255, 255, 255));
+        booklist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        booklist.setForeground(new java.awt.Color(255, 255, 255));
+        booklist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/book-stack-32.png"))); // NOI18N
+        booklist.setText("Quản lý kho sách");
+        booklist.setIconTextGap(12);
+        booklist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                booklistMouseClicked(evt);
+            }
+        });
+        jPanel4.add(booklist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 240, 70));
+
+        jPanel5.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel5MouseExited(evt);
+            }
+        });
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        borrowlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        borrowlist.setForeground(new java.awt.Color(255, 255, 255));
+        borrowlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-2-32.png"))); // NOI18N
+        borrowlist.setText("Quản lý mượn sách");
+        borrowlist.setIconTextGap(12);
+        borrowlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                borrowlistMouseClicked(evt);
+            }
+        });
+        jPanel5.add(borrowlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, 70));
+
+        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel6MouseExited(evt);
+            }
+        });
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        returnlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        returnlist.setForeground(new java.awt.Color(255, 255, 255));
+        returnlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow-96-32.png"))); // NOI18N
+        returnlist.setText("Quản lý trả sách");
+        returnlist.setIconTextGap(12);
+        returnlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                returnlistMouseClicked(evt);
+            }
+        });
+        jPanel6.add(returnlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 40));
+
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 240, 70));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/administrator-64.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 70, 80));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Quản lý thư viện");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+
+        jPanel7.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel7MouseExited(evt);
+            }
+        });
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        librarianlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        librarianlist.setForeground(new java.awt.Color(255, 255, 255));
+        librarianlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/contacts-32.png"))); // NOI18N
+        librarianlist.setText("Quản lý nhân viên");
+        librarianlist.setIconTextGap(12);
+        librarianlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                librarianlistMouseClicked(evt);
+            }
+        });
+        jPanel7.add(librarianlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 180, 40));
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 240, 70));
+
+        jPanel8.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel8MouseExited(evt);
+            }
+        });
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        userlist.setForeground(new java.awt.Color(255, 255, 255));
+        userlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user-5-32.png"))); // NOI18N
+        userlist.setText("Quản lý người mượn");
+        userlist.setIconTextGap(12);
+        userlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userlistMouseClicked(evt);
+            }
+        });
+        jPanel8.add(userlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 200, 40));
+
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 240, 70));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 768));
 
         pack();
         setLocationRelativeTo(null);
@@ -349,12 +531,121 @@ public class ViewBook extends javax.swing.JFrame {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
-    private void backbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbuttonActionPerformed
-        
-        BookList bookList = new BookList();
-        bookList.setVisible(true);
+    private void dashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardMouseClicked
         close();
-    }//GEN-LAST:event_backbuttonActionPerformed
+        DashBoard db = new DashBoard();
+        db.setVisible(true);
+    }//GEN-LAST:event_dashboardMouseClicked
+
+    private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel3.setBackground(color);
+    }//GEN-LAST:event_jPanel3MouseEntered
+
+    private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
+        Color color = new Color(0,102,102);
+        jPanel3.setBackground(color);
+    }//GEN-LAST:event_jPanel3MouseExited
+
+    private void booklistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_booklistMouseClicked
+        close();
+        BookList bkl = new BookList();
+        bkl.setVisible(true);
+    }//GEN-LAST:event_booklistMouseClicked
+
+    private void jPanel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel4.setBackground(color);
+    }//GEN-LAST:event_jPanel4MouseEntered
+
+    private void jPanel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseExited
+        Color color = new Color(0,102,102);
+        jPanel4.setBackground(color);
+    }//GEN-LAST:event_jPanel4MouseExited
+
+    private void borrowlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrowlistMouseClicked
+        close();
+        BorrowList bl = new BorrowList();
+        bl.setVisible(true);
+    }//GEN-LAST:event_borrowlistMouseClicked
+
+    private void jPanel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel5.setBackground(color);
+    }//GEN-LAST:event_jPanel5MouseEntered
+
+    private void jPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseExited
+        Color color = new Color(0,102,102);
+        jPanel5.setBackground(color);
+    }//GEN-LAST:event_jPanel5MouseExited
+
+    private void returnlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnlistMouseClicked
+        close();
+        ReturnList rl = new ReturnList();
+        rl.setVisible(true);
+    }//GEN-LAST:event_returnlistMouseClicked
+
+    private void jPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel6.setBackground(color);
+    }//GEN-LAST:event_jPanel6MouseEntered
+
+    private void jPanel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseExited
+        Color color = new Color(0,102,102);
+        jPanel6.setBackground(color);
+    }//GEN-LAST:event_jPanel6MouseExited
+
+    private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
+        close();
+        LibrarianList ll = new LibrarianList();
+        ll.setVisible(true);
+    }//GEN-LAST:event_librarianlistMouseClicked
+
+    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel7.setBackground(color);
+    }//GEN-LAST:event_jPanel7MouseEntered
+
+    private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
+        Color color = new Color(0,102,102);
+        jPanel7.setBackground(color);
+    }//GEN-LAST:event_jPanel7MouseExited
+
+    private void userlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userlistMouseClicked
+        close();
+        UserList ul = new UserList();
+        ul.setVisible(true);
+    }//GEN-LAST:event_userlistMouseClicked
+
+    private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel8.setBackground(color);
+    }//GEN-LAST:event_jPanel8MouseEntered
+
+    private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
+        Color color = new Color(0,102,102);
+        jPanel8.setBackground(color);
+    }//GEN-LAST:event_jPanel8MouseExited
+
+    private void returnButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnButtonMouseClicked
+        close();
+        BookList bl = new BookList();
+        bl.setVisible(true);
+    }//GEN-LAST:event_returnButtonMouseClicked
+
+    private void returnButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnButtonMouseEntered
+        Color color = new Color(0,51,51);
+        returnButton.setBackground(color);
+    }//GEN-LAST:event_returnButtonMouseEntered
+
+    private void returnButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnButtonMouseExited
+        Color color = new Color(0,102,102);
+        returnButton.setBackground(color);
+    }//GEN-LAST:event_returnButtonMouseExited
+
+    private void totalquantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalquantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalquantityActionPerformed
    
     /**
      * @param args the command line arguments2`
@@ -391,11 +682,16 @@ public class ViewBook extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> authorList;
-    private javax.swing.JButton backbutton;
-    private javax.swing.JTable bookdetaillist;
+    private form.table.Table bookdetaillist;
+    private javax.swing.JLabel booklist;
     private javax.swing.JTextField booktitle;
+    private javax.swing.JLabel borrowlist;
+    private javax.swing.JLabel dashboard;
     private javax.swing.JList<String> genreList;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -403,15 +699,29 @@ public class ViewBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel librarianlist;
     private javax.swing.JTextField part;
     private javax.swing.JTextField publishedyear;
     private javax.swing.JTextField publishername;
+    private javax.swing.JButton returnButton;
+    private javax.swing.JLabel returnlist;
     private javax.swing.JTextField totalquantity;
+    private javax.swing.JLabel userlist;
     // End of variables declaration//GEN-END:variables
 }

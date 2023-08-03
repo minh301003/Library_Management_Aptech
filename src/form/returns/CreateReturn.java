@@ -4,6 +4,11 @@
  */
 package form.returns;
 
+import form.books.BookList;
+import form.borrow.BorrowList;
+import form.dashboard.DashBoard;
+import form.librarians.LibrarianList;
+import form.users.UserList;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -59,7 +64,6 @@ public class CreateReturn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         returnButton = new javax.swing.JButton();
@@ -95,24 +99,24 @@ public class CreateReturn extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         bookPart = new javax.swing.JTextField();
         confirmReturnButton = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        dashboard = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        booklist = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        borrowlist = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        returnlist = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        librarianlist = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        userlist = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 768));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -173,9 +177,6 @@ public class CreateReturn extends javax.swing.JFrame {
         findBorrowButton.setText("Tìm kiếm");
         findBorrowButton.setBorder(null);
         findBorrowButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                findBorrowButtonMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 findBorrowButtonMouseEntered(evt);
             }
@@ -195,7 +196,7 @@ public class CreateReturn extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel13.setText("%");
+        jLabel13.setText("(%)");
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 153, 153));
@@ -238,16 +239,16 @@ public class CreateReturn extends javax.swing.JFrame {
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel12))
-                                .addGap(33, 33, 33)
+                                    .addComponent(jLabel12)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel13)))
+                                .addGap(19, 19, 19)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(bookDetailID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(bookStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel13))))
+                                    .addComponent(bookStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(fineBookDamage, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
@@ -260,7 +261,7 @@ public class CreateReturn extends javax.swing.JFrame {
                                     .addComponent(note2)
                                     .addComponent(note1)))
                             .addComponent(findBorrowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,9 +383,6 @@ public class CreateReturn extends javax.swing.JFrame {
         confirmReturnButton.setText("Trả sách");
         confirmReturnButton.setBorder(null);
         confirmReturnButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                confirmReturnButtonMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 confirmReturnButtonMouseEntered(evt);
             }
@@ -400,6 +398,170 @@ public class CreateReturn extends javax.swing.JFrame {
         jPanel2.add(confirmReturnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 620, 180, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 784, 768));
+
+        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel7.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel7MouseExited(evt);
+            }
+        });
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dashboard.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        dashboard.setForeground(new java.awt.Color(255, 255, 255));
+        dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/home-3-32.png"))); // NOI18N
+        dashboard.setText("Trang chủ");
+        dashboard.setIconTextGap(12);
+        dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dashboardMouseClicked(evt);
+            }
+        });
+        jPanel7.add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
+
+        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 240, 70));
+
+        jPanel8.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel8MouseExited(evt);
+            }
+        });
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        booklist.setBackground(new java.awt.Color(255, 255, 255));
+        booklist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        booklist.setForeground(new java.awt.Color(255, 255, 255));
+        booklist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/book-stack-32.png"))); // NOI18N
+        booklist.setText("Quản lý kho sách");
+        booklist.setIconTextGap(12);
+        booklist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                booklistMouseClicked(evt);
+            }
+        });
+        jPanel8.add(booklist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jPanel6.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 240, 70));
+
+        jPanel9.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel9MouseExited(evt);
+            }
+        });
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        borrowlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        borrowlist.setForeground(new java.awt.Color(255, 255, 255));
+        borrowlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-2-32.png"))); // NOI18N
+        borrowlist.setText("Quản lý mượn sách");
+        borrowlist.setIconTextGap(12);
+        borrowlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                borrowlistMouseClicked(evt);
+            }
+        });
+        jPanel9.add(borrowlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, 70));
+
+        jPanel10.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel10MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel10MouseExited(evt);
+            }
+        });
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        returnlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        returnlist.setForeground(new java.awt.Color(255, 255, 255));
+        returnlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow-96-32.png"))); // NOI18N
+        returnlist.setText("Quản lý trả sách");
+        returnlist.setIconTextGap(12);
+        returnlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                returnlistMouseClicked(evt);
+            }
+        });
+        jPanel10.add(returnlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 40));
+
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 240, 70));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/administrator-64.png"))); // NOI18N
+        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 70, 80));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Quản lý thư viện");
+        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+
+        jPanel11.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel11MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel11MouseExited(evt);
+            }
+        });
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        librarianlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        librarianlist.setForeground(new java.awt.Color(255, 255, 255));
+        librarianlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/contacts-32.png"))); // NOI18N
+        librarianlist.setText("Quản lý nhân viên");
+        librarianlist.setIconTextGap(12);
+        librarianlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                librarianlistMouseClicked(evt);
+            }
+        });
+        jPanel11.add(librarianlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 180, 40));
+
+        jPanel6.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 240, 70));
+
+        jPanel12.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel12MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel12MouseExited(evt);
+            }
+        });
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userlist.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        userlist.setForeground(new java.awt.Color(255, 255, 255));
+        userlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user-5-32.png"))); // NOI18N
+        userlist.setText("Quản lý người mượn");
+        userlist.setIconTextGap(12);
+        userlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userlistMouseClicked(evt);
+            }
+        });
+        jPanel12.add(userlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 200, 40));
+
+        jPanel6.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 240, 70));
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 768));
 
         pack();
         setLocationRelativeTo(null);
@@ -421,10 +583,6 @@ public class CreateReturn extends javax.swing.JFrame {
         returnButton.setBackground(color);
     }//GEN-LAST:event_returnButtonMouseExited
 
-    private void findBorrowButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_findBorrowButtonMouseClicked
-        
-    }//GEN-LAST:event_findBorrowButtonMouseClicked
-
     private void findBorrowButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_findBorrowButtonMouseEntered
         Color color = new Color(0,51,51);
         findBorrowButton.setBackground(color);
@@ -434,10 +592,6 @@ public class CreateReturn extends javax.swing.JFrame {
         Color color = new Color(0,102,102);
         findBorrowButton.setBackground(color);
     }//GEN-LAST:event_findBorrowButtonMouseExited
-
-    private void confirmReturnButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmReturnButtonMouseClicked
-        
-    }//GEN-LAST:event_confirmReturnButtonMouseClicked
 
     private void confirmReturnButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmReturnButtonMouseEntered
         Color color = new Color(0,51,51);
@@ -622,6 +776,102 @@ public class CreateReturn extends javax.swing.JFrame {
     private void fineReturnLateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fineReturnLateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fineReturnLateActionPerformed
+
+    private void dashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardMouseClicked
+        close();
+        DashBoard db = new DashBoard();
+        db.setVisible(true);
+    }//GEN-LAST:event_dashboardMouseClicked
+
+    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel7.setBackground(color);
+    }//GEN-LAST:event_jPanel7MouseEntered
+
+    private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
+        Color color = new Color(0,102,102);
+        jPanel7.setBackground(color);
+    }//GEN-LAST:event_jPanel7MouseExited
+
+    private void booklistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_booklistMouseClicked
+        close();
+        BookList bkl = new BookList();
+        bkl.setVisible(true);
+    }//GEN-LAST:event_booklistMouseClicked
+
+    private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel8.setBackground(color);
+    }//GEN-LAST:event_jPanel8MouseEntered
+
+    private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
+        Color color = new Color(0,102,102);
+        jPanel8.setBackground(color);
+    }//GEN-LAST:event_jPanel8MouseExited
+
+    private void borrowlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrowlistMouseClicked
+        close();
+        BorrowList bl = new BorrowList();
+        bl.setVisible(true);
+    }//GEN-LAST:event_borrowlistMouseClicked
+
+    private void jPanel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel9.setBackground(color);
+    }//GEN-LAST:event_jPanel9MouseEntered
+
+    private void jPanel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseExited
+        Color color = new Color(0,102,102);
+        jPanel9.setBackground(color);
+    }//GEN-LAST:event_jPanel9MouseExited
+
+    private void returnlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnlistMouseClicked
+        close();
+        ReturnList rl = new ReturnList();
+        rl.setVisible(true);
+    }//GEN-LAST:event_returnlistMouseClicked
+
+    private void jPanel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel10.setBackground(color);
+    }//GEN-LAST:event_jPanel10MouseEntered
+
+    private void jPanel10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseExited
+        Color color = new Color(0,102,102);
+        jPanel10.setBackground(color);
+    }//GEN-LAST:event_jPanel10MouseExited
+
+    private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
+        close();
+        LibrarianList ll = new LibrarianList();
+        ll.setVisible(true);
+    }//GEN-LAST:event_librarianlistMouseClicked
+
+    private void jPanel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel11.setBackground(color);
+    }//GEN-LAST:event_jPanel11MouseEntered
+
+    private void jPanel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseExited
+        Color color = new Color(0,102,102);
+        jPanel11.setBackground(color);
+    }//GEN-LAST:event_jPanel11MouseExited
+
+    private void userlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userlistMouseClicked
+        close();
+        UserList ul = new UserList();
+        ul.setVisible(true);
+    }//GEN-LAST:event_userlistMouseClicked
+
+    private void jPanel12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseEntered
+        Color color = new Color(0,153,153);
+        jPanel12.setBackground(color);
+    }//GEN-LAST:event_jPanel12MouseEntered
+
+    private void jPanel12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseExited
+        Color color = new Color(0,102,102);
+        jPanel12.setBackground(color);
+    }//GEN-LAST:event_jPanel12MouseExited
     public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
@@ -687,8 +937,11 @@ public class CreateReturn extends javax.swing.JFrame {
     private javax.swing.JTextField bookPart;
     private form.suggestion_combo.ComboBoxSuggestion bookStatus;
     private javax.swing.JTextField bookTitle;
+    private javax.swing.JLabel booklist;
     private com.toedter.calendar.JDateChooser borrowDate;
+    private javax.swing.JLabel borrowlist;
     private javax.swing.JButton confirmReturnButton;
+    private javax.swing.JLabel dashboard;
     private com.toedter.calendar.JDateChooser dueDate;
     private javax.swing.JButton findBorrowButton;
     private javax.swing.JTextField fineBookDamage;
@@ -700,6 +953,8 @@ public class CreateReturn extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -708,17 +963,26 @@ public class CreateReturn extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField librarianName;
+    private javax.swing.JLabel librarianlist;
     private javax.swing.JTextField note1;
     private javax.swing.JTextField note2;
     private javax.swing.JButton returnButton;
+    private javax.swing.JLabel returnlist;
     private form.suggestion_combo.ComboBoxSuggestion userID;
     private javax.swing.JTextField userName;
+    private javax.swing.JLabel userlist;
     // End of variables declaration//GEN-END:variables
 
     
