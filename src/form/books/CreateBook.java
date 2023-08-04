@@ -291,7 +291,7 @@ public class CreateBook extends javax.swing.JFrame {
 
         jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 240, 100));
 
-        jPanel9.add(publishername, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 180, 30));
+        jPanel9.add(publishername, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 180, 30));
 
         booktitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,13 +299,13 @@ public class CreateBook extends javax.swing.JFrame {
             }
         });
         jPanel9.add(booktitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 240, 30));
-        jPanel9.add(publishedyear, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 180, 30));
+        jPanel9.add(publishedyear, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 180, 30));
 
         jScrollPane3.setViewportView(genreList);
 
         jPanel9.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 240, 100));
-        jPanel9.add(quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, -1, 30));
-        jPanel9.add(bookpart, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, -1, 30));
+        jPanel9.add(quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, 30));
+        jPanel9.add(bookpart, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 153));
@@ -320,12 +320,12 @@ public class CreateBook extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 153, 153));
         jLabel12.setText("Số phần");
-        jPanel9.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, -1));
+        jPanel9.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Nhà xuất bản");
-        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
+        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 153, 153));
@@ -339,13 +339,13 @@ public class CreateBook extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel7.setText("Số lượng thêm");
+        jLabel7.setText("Số lượng mỗi phần");
         jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, -1, 20));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 153, 153));
         jLabel14.setText("Năm xuất bản");
-        jPanel9.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, 20));
+        jPanel9.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, 20));
 
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 680, 350));
 
@@ -513,7 +513,7 @@ public class CreateBook extends javax.swing.JFrame {
                 bookPartInsert.setInt(1, bookTitleID);
                 bookPartInsert.setInt(2, i);
                 bookPartInsert.executeUpdate();
-                //Get booktitle_id inorder to insert later 
+                //Get bookpart_id in order to insert later 
                 ResultSet bookPartKey = bookPartInsert .getGeneratedKeys();
                 while (bookPartKey .next()) {
                     bookPartIDList.add(bookPartKey.getInt(1));

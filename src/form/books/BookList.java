@@ -43,7 +43,10 @@ public class BookList extends javax.swing.JFrame {
         event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                System.out.println("Edit row: " + row);
+                String id = booktitlelist.getModel().getValueAt(row, 0).toString();
+                close(); 
+                EditBook editBook = new EditBook(id);
+                editBook.setVisible(true);
                 
             }
 
