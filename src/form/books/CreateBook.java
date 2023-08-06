@@ -7,6 +7,7 @@ package form.books;
 import form.borrow.BorrowList;
 import form.dashboard.DashBoard;
 import form.librarians.LibrarianList;
+import static form.login.Login.Admin;
 import form.returns.ReturnList;
 import form.users.UserList;
 import java.awt.Color;
@@ -279,70 +280,86 @@ public class CreateBook extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Thêm mới sách");
+        jLabel11.setText("Thêm sách mới");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         author.setColumns(20);
+        author.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         author.setRows(5);
         jScrollPane1.setViewportView(author);
 
         jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 240, 100));
 
-        jPanel9.add(publishername, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 180, 30));
+        publishername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel9.add(publishername, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 180, 30));
 
+        booktitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        booktitle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         booktitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 booktitleActionPerformed(evt);
             }
         });
         jPanel9.add(booktitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 240, 30));
-        jPanel9.add(publishedyear, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 180, 30));
 
+        publishedyear.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+        publishedyear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                publishedyearActionPerformed(evt);
+            }
+        });
+        jPanel9.add(publishedyear, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, 180, 30));
+
+        genreList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jScrollPane3.setViewportView(genreList);
 
         jPanel9.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 240, 100));
-        jPanel9.add(quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, 30));
-        jPanel9.add(bookpart, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, 30));
+
+        quantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel9.add(quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, -1, 30));
+
+        bookpart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel9.add(bookpart, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("Thông tin sách  ");
         jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 153, 153));
         jLabel10.setText("Tiêu đề sách");
         jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 153, 153));
         jLabel12.setText("Số phần");
         jPanel9.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Nhà xuất bản");
         jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 153, 153));
         jLabel5.setText("Tác giả");
         jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 153, 153));
         jLabel13.setText("Thể loại");
         jPanel9.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 153, 153));
         jLabel7.setText("Số lượng mỗi phần");
         jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, -1, 20));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 153, 153));
         jLabel14.setText("Năm xuất bản");
         jPanel9.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, 20));
@@ -393,15 +410,14 @@ public class CreateBook extends javax.swing.JFrame {
     private void fetchGenre() {
         genreModel = new DefaultListModel();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
+            Connection c = connectDB();
             ResultSet rs = c.createStatement().executeQuery("Select genre from genre");
             while (rs.next()) {
                 String data = rs.getString("genre");
                 genreModel.addElement(data);  
             }
             genreList.setModel(genreModel);     
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -432,8 +448,7 @@ public class CreateBook extends javax.swing.JFrame {
             //Get quantity
             int Quantity = (Integer) quantity.getValue();
             //Connect to db
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
+            Connection conn = connectDB();
             //Insert into booktitle table
             String query = "INSERT INTO booktitle (booktitle, publishedyear, publisher_id) VALUES(? , ?, ?)";
             PreparedStatement bookTitleInsert = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -540,7 +555,7 @@ public class CreateBook extends javax.swing.JFrame {
             bookpart.setValue(1);
             quantity.setValue(1);
         
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_createBookTitleActionPerformed
@@ -613,9 +628,13 @@ public class CreateBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseExited
 
     private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
-        close();
-        LibrarianList ll = new LibrarianList();
-        ll.setVisible(true);
+         if (Admin.getLevel() == 1) {
+            close();
+            LibrarianList ll = new LibrarianList();
+            ll.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập vào phần này!");
+        }
     }//GEN-LAST:event_librarianlistMouseClicked
 
     private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
@@ -675,6 +694,10 @@ public class CreateBook extends javax.swing.JFrame {
         Color color = new Color(0,102,102);
         createBookTitle.setBackground(color);
     }//GEN-LAST:event_createBookTitleMouseExited
+
+    private void publishedyearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publishedyearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_publishedyearActionPerformed
 
     /**
      * @param args the command line arguments

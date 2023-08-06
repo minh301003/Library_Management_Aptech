@@ -10,6 +10,7 @@ import form.borrow.BorrowList;
 import form.dashboard.DashBoard;
 import form.librarians.LibrarianList;
 import static form.librarians.LibrarianList.getLibrarianList;
+import static form.login.Login.Admin;
 import form.users.UserList;
 import static form.users.UserList.getUserList;
 import java.awt.Color;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -140,6 +142,7 @@ public class ReturnList extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        returntable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(returntable);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 710, 390));
@@ -404,9 +407,13 @@ public class ReturnList extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseExited
 
     private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
-        close();
-        LibrarianList ll = new LibrarianList();
-        ll.setVisible(true);
+         if (Admin.getLevel() == 1) {
+            close();
+            LibrarianList ll = new LibrarianList();
+            ll.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập vào phần này!");
+        }
     }//GEN-LAST:event_librarianlistMouseClicked
 
     private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered

@@ -8,6 +8,7 @@ package form.books;
 import form.borrow.BorrowList;
 import form.dashboard.DashBoard;
 import form.librarians.LibrarianList;
+import static form.login.Login.Admin;
 import form.returns.ReturnList;
 import form.users.UserList;
 import java.awt.Color;
@@ -298,8 +299,20 @@ public class EditBook extends javax.swing.JFrame {
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         publishername.setEditable(true);
-        jPanel9.add(publishername, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 180, 30));
+        publishername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel9.add(publishername, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 180, 30));
+
+        booktitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        booktitle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         jPanel9.add(booktitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 180, 30));
+
+        publishedyear.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        publishedyear.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+        publishedyear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                publishedyearActionPerformed(evt);
+            }
+        });
         jPanel9.add(publishedyear, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 180, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -307,20 +320,20 @@ public class EditBook extends javax.swing.JFrame {
         jLabel3.setText("Xuất bản  ");
         jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 153, 153));
         jLabel10.setText("Tiêu đề sách");
-        jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 56, -1, 20));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Nhà xuất bản");
         jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 153, 153));
         jLabel14.setText("Năm xuất bản");
-        jPanel9.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 20));
+        jPanel9.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
 
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 330, 190));
 
@@ -367,6 +380,7 @@ public class EditBook extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        authorList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         authorList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 authorListMouseClicked(evt);
@@ -380,6 +394,9 @@ public class EditBook extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 153, 153));
         jLabel8.setText("Tác giả");
         jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+
+        authorField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        authorField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         jPanel10.add(authorField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 220, 30));
 
         addAuthorButton.setBackground(new java.awt.Color(0, 153, 153));
@@ -417,6 +434,7 @@ public class EditBook extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        genreList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         genreList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 genreListMouseClicked(evt);
@@ -430,6 +448,9 @@ public class EditBook extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 153, 153));
         jLabel9.setText("Thể loại");
         jPanel11.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
+
+        genreField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        genreField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         jPanel11.add(genreField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 220, 30));
 
         addGenreButton.setBackground(new java.awt.Color(0, 153, 153));
@@ -471,17 +492,21 @@ public class EditBook extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 153, 153));
         jLabel6.setText("Phần");
         jPanel12.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
+
+        parts.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel12.add(parts, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 153, 153));
         jLabel12.setText("Số lượng mỗi phần");
         jPanel12.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 153, 153));
         jLabel13.setText("Số phần");
         jPanel12.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+
+        quantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel12.add(quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
 
         jPanel2.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 330, 190));
@@ -561,9 +586,13 @@ public class EditBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseExited
 
     private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
-        close();
-        LibrarianList ll = new LibrarianList();
-        ll.setVisible(true);
+         if (Admin.getLevel() == 1) {
+            close();
+            LibrarianList ll = new LibrarianList();
+            ll.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập vào phần này!");
+        }
     }//GEN-LAST:event_librarianlistMouseClicked
 
     private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
@@ -863,6 +892,10 @@ public class EditBook extends javax.swing.JFrame {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_updateBookActionPerformed
+
+    private void publishedyearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publishedyearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_publishedyearActionPerformed
     private void fetchAuthor() {
         try {
             Connection c = connectDB();

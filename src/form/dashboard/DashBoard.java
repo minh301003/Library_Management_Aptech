@@ -6,10 +6,14 @@ package form.dashboard;
 
 import form.books.BookList;
 import form.borrow.BorrowList;
+import form.librarians.LibrarianList;
+import form.login.Login;
+import static form.login.Login.Admin;
 import form.returns.ReturnList;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,7 +43,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         booklist = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        librarianlist = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         borrowlist = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -104,20 +108,23 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(0, 102, 102));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/contacts-64.png"))); // NOI18N
-        jLabel4.setText("Quản lý nhân viên");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        librarianlist.setBackground(new java.awt.Color(255, 255, 255));
+        librarianlist.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        librarianlist.setForeground(new java.awt.Color(255, 255, 255));
+        librarianlist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/contacts-64.png"))); // NOI18N
+        librarianlist.setText("Quản lý nhân viên");
+        librarianlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                librarianlistMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel4MouseEntered(evt);
+                librarianlistMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel4MouseExited(evt);
+                librarianlistMouseExited(evt);
             }
         });
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 250, 80));
+        jPanel5.add(librarianlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 250, 80));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 270, 120));
 
@@ -153,6 +160,9 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         jLabel7.setText("Đăng xuất");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel7MouseEntered(evt);
             }
@@ -160,7 +170,7 @@ public class DashBoard extends javax.swing.JFrame {
                 jLabel7MouseExited(evt);
             }
         });
-        jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 230, 70));
+        jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 230, 70));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 270, 120));
 
@@ -225,17 +235,17 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel4.setBackground(color);
     }//GEN-LAST:event_booklistMouseExited
 
-    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+    private void librarianlistMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseEntered
         // TODO add your handling code here:
          Color color = new Color(0,51,51);
         jPanel5.setBackground(color);
-    }//GEN-LAST:event_jLabel4MouseEntered
+    }//GEN-LAST:event_librarianlistMouseEntered
 
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+    private void librarianlistMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseExited
         // TODO add your handling code here:
         Color color = new Color(0,102,102);
         jPanel5.setBackground(color);
-    }//GEN-LAST:event_jLabel4MouseExited
+    }//GEN-LAST:event_librarianlistMouseExited
 
     private void borrowlistMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrowlistMouseEntered
         // TODO add your handling code here:
@@ -293,6 +303,23 @@ public class DashBoard extends javax.swing.JFrame {
         ReturnList returnList = new ReturnList();
         returnList.setVisible(true);
     }//GEN-LAST:event_returnlistMouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        close();
+        Login login = new Login();
+        login.setVisible(true);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
+       
+        if (Admin.getLevel() == 1) {
+            close();
+            LibrarianList ll = new LibrarianList();
+            ll.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập vào phần này!");
+        }
+    }//GEN-LAST:event_librarianlistMouseClicked
     public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
@@ -336,7 +363,6 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel booklist;
     private javax.swing.JLabel borrowlist;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -347,6 +373,7 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel librarianlist;
     private javax.swing.JLabel returnlist;
     // End of variables declaration//GEN-END:variables
 }

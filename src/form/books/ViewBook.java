@@ -8,6 +8,7 @@ import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import form.borrow.BorrowList;
 import form.dashboard.DashBoard;
 import form.librarians.LibrarianList;
+import static form.login.Login.Admin;
 import form.returns.ReturnList;
 import form.users.UserList;
 import java.awt.Color;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static utils.Database.connectDB;
 
@@ -228,30 +230,37 @@ public class ViewBook extends javax.swing.JFrame {
 
         part.setEditable(false);
         part.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel9.add(part, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 200, 30));
+        part.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        part.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+        jPanel9.add(part, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 200, 30));
 
+        genreList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jScrollPane3.setViewportView(genreList);
 
-        jPanel9.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 200, 70));
+        jPanel9.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 200, 70));
 
+        authorList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jScrollPane4.setViewportView(authorList);
 
         jPanel9.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 70));
 
         publishername.setEditable(false);
         publishername.setBackground(new java.awt.Color(255, 255, 255));
-        publishername.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        publishername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        publishername.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         jPanel9.add(publishername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
 
         publishedyear.setEditable(false);
         publishedyear.setBackground(new java.awt.Color(255, 255, 255));
-        publishedyear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        publishedyear.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        publishedyear.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         publishedyear.setSelectionColor(new java.awt.Color(255, 255, 255));
-        jPanel9.add(publishedyear, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 200, 30));
+        jPanel9.add(publishedyear, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 200, 30));
 
         booktitle.setEditable(false);
         booktitle.setBackground(new java.awt.Color(255, 255, 255));
-        booktitle.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        booktitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        booktitle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         booktitle.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         booktitle.setSelectionColor(new java.awt.Color(255, 255, 255));
         jPanel9.add(booktitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 200, 30));
@@ -261,32 +270,32 @@ public class ViewBook extends javax.swing.JFrame {
         jLabel3.setText("Thông tin sách  ");
         jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Nhà xuất bản");
-        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 153, 153));
         jLabel5.setText("Tác giả");
-        jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 153, 153));
         jLabel7.setText("Năm xuất bản");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, 20));
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, -1, 20));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 153));
         jLabel8.setText("Tiêu đề sách");
-        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 153, 153));
         jLabel9.setText("Thể loại");
         jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 153, 153));
         jLabel10.setText("Số phần");
         jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
@@ -344,6 +353,7 @@ public class ViewBook extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        bookdetaillist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jScrollPane5.setViewportView(bookdetaillist);
 
         jPanel2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 680, 190));
@@ -596,9 +606,13 @@ public class ViewBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseExited
 
     private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
-        close();
-        LibrarianList ll = new LibrarianList();
-        ll.setVisible(true);
+         if (Admin.getLevel() == 1) {
+            close();
+            LibrarianList ll = new LibrarianList();
+            ll.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập vào phần này!");
+        }
     }//GEN-LAST:event_librarianlistMouseClicked
 
     private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered

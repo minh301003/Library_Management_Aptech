@@ -7,6 +7,7 @@ package form.borrow;
 import form.books.BookList;
 import form.dashboard.DashBoard;
 import form.librarians.LibrarianList;
+import static form.login.Login.Admin;
 import form.returns.ReturnList;
 import form.users.UserList;
 import static form.users.UserList.getUserList;
@@ -159,33 +160,40 @@ public class CreateBorrow extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 153, 153));
         jLabel6.setText("Phần");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
         bookpart.setEditable(false);
         bookpart.setBackground(new java.awt.Color(255, 255, 255));
+        bookpart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bookpart.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         jPanel1.add(bookpart, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 150, 30));
 
         bookstatus.setEditable(false);
         bookstatus.setBackground(new java.awt.Color(255, 255, 255));
+        bookstatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bookstatus.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         jPanel1.add(bookstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 150, 30));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 153, 153));
         jLabel7.setText("Trạng thái sách");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Tiêu đề sách");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
         booktitle.setEditable(false);
         booktitle.setBackground(new java.awt.Color(255, 255, 255));
+        booktitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        booktitle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         jPanel1.add(booktitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 150, 30));
 
+        bookdetailID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bookdetailID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bookdetailIDActionPerformed(evt);
@@ -193,16 +201,17 @@ public class CreateBorrow extends javax.swing.JFrame {
         });
         jPanel1.add(bookdetailID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 150, 30));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 153, 153));
         jLabel13.setText("Tác giả");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 153, 153));
         jLabel2.setText("Mã Serial");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
+        authorList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(authorList);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 150, 130));
@@ -217,32 +226,43 @@ public class CreateBorrow extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        email.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+
+        name.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+
+        phone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        phone.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+
         duedate.setDateFormatString("yyyy-MM-dd");
+        duedate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         duedate.setMinSelectableDate(new java.util.Date());
 
         borrowdate.setDateFormatString("yyyy-MM-dd");
+        borrowdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 153, 153));
         jLabel5.setText("Thông tin người mượn");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 153));
         jLabel8.setText("Họ tên");
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 153, 153));
         jLabel15.setText("Email");
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 153, 153));
         jLabel16.setText("Số điện thoại");
 
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 153, 153));
         jLabel17.setText("Ngày mượn");
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 153, 153));
         jLabel18.setText("Ngày trả");
 
@@ -262,7 +282,7 @@ public class CreateBorrow extends javax.swing.JFrame {
                             .addComponent(borrowdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                                 .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
@@ -306,7 +326,7 @@ public class CreateBorrow extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addGap(31, 31, 31)
                 .addComponent(duedate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jPanel5.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 340, 480));
@@ -634,7 +654,7 @@ public class CreateBorrow extends javax.swing.JFrame {
                    userID = getUserIdKey.getInt("id");
                 }
                 borrowInsert.setInt(2, userID);
-                borrowInsert.setInt(3, 1);
+                borrowInsert.setInt(3, Admin.getId());
                 borrowInsert.setString(4, ((JTextField)borrowdate.getDateEditor().getUiComponent()).getText());
                 borrowInsert.setString(5, ((JTextField)duedate.getDateEditor().getUiComponent()).getText());
                 borrowInsert.executeUpdate();
@@ -755,9 +775,13 @@ public class CreateBorrow extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel9MouseExited
 
     private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
-        close();
-        LibrarianList ll = new LibrarianList();
-        ll.setVisible(true);
+         if (Admin.getLevel() == 1) {
+            close();
+            LibrarianList ll = new LibrarianList();
+            ll.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập vào phần này!");
+        }
     }//GEN-LAST:event_librarianlistMouseClicked
 
     private void jPanel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseEntered

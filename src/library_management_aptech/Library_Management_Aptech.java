@@ -4,6 +4,7 @@
  */
 package library_management_aptech;
 import form.dashboard.DashBoard;
+import form.login.Login;
 import static utils.Database.*;
 
 
@@ -19,14 +20,8 @@ public class Library_Management_Aptech {
     public static void main(String[] args) {
     
         connectDB();
-        DashBoard dashBoard = new DashBoard();
-        dashBoard.setVisible(true);
-        
-
-        
-
-        
-        
+        Login login = new Login();
+        login.setVisible(true);
     }
     
     

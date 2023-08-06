@@ -8,6 +8,7 @@ import form.books.BookList;
 import form.borrow.BorrowList;
 import form.dashboard.DashBoard;
 import form.librarians.LibrarianList;
+import static form.login.Login.Admin;
 import form.users.UserList;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -16,10 +17,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -153,18 +156,23 @@ public class CreateReturn extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 153, 153));
         jLabel2.setText("Thông tin trả sách ");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("Mã serial sách");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
         jLabel4.setText("Mã người mượn");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 153, 153));
         jLabel5.setText("Tình trạng sách");
 
+        bookDetailID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        userID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        bookStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bookStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bookStatusActionPerformed(evt);
@@ -172,7 +180,7 @@ public class CreateReturn extends javax.swing.JFrame {
         });
 
         findBorrowButton.setBackground(new java.awt.Color(0, 102, 102));
-        findBorrowButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        findBorrowButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         findBorrowButton.setForeground(new java.awt.Color(255, 255, 255));
         findBorrowButton.setText("Tìm kiếm");
         findBorrowButton.setBorder(null);
@@ -190,7 +198,7 @@ public class CreateReturn extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 153, 153));
         jLabel12.setText("Phạt (nếu có)");
 
@@ -198,25 +206,25 @@ public class CreateReturn extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 153, 153));
         jLabel13.setText("(%)");
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 153, 153));
         jLabel15.setText("Ghi chú");
 
         note1.setEditable(false);
         note1.setBackground(new java.awt.Color(255, 255, 255));
-        note1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        note1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         fineBookDamage.setEditable(false);
         fineBookDamage.setBackground(new java.awt.Color(255, 255, 255));
-        fineBookDamage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        fineBookDamage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         note2.setEditable(false);
         note2.setBackground(new java.awt.Color(255, 255, 255));
-        note2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        note2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         fineReturnLate.setEditable(false);
         fineReturnLate.setBackground(new java.awt.Color(255, 255, 255));
-        fineReturnLate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        fineReturnLate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         fineReturnLate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fineReturnLateActionPerformed(evt);
@@ -228,74 +236,76 @@ public class CreateReturn extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(findBorrowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jLabel2))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fineBookDamage, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fineReturnLate, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(note2)
+                            .addComponent(note1)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel12)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel13)))
-                                .addGap(19, 19, 19)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bookDetailID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bookStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(fineBookDamage, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                                    .addComponent(fineReturnLate))
+                                        .addComponent(jLabel13))
+                                    .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel15)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(note2)
-                                    .addComponent(note1)))
-                            .addComponent(findBorrowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 14, Short.MAX_VALUE))
+                                    .addComponent(bookDetailID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bookStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel15)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(43, 43, 43))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel2)
-                .addGap(61, 61, 61)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(bookDetailID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bookStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel13))
-                .addGap(32, 32, 32)
+                    .addComponent(jLabel13)
+                    .addComponent(bookStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(fineReturnLate, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(note2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fineReturnLate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(note2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(fineBookDamage, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(note1))
                 .addGap(18, 18, 18)
-                .addComponent(findBorrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addComponent(findBorrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 480));
@@ -309,73 +319,83 @@ public class CreateReturn extends javax.swing.JFrame {
         jLabel6.setText("Thông tin mượn sách ");
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 40));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 153, 153));
         jLabel7.setText("Phần");
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel8.setText("Tên người dùng");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        jLabel8.setText("Tên người mượn");
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 153, 153));
         jLabel9.setText("Ngày mượn");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 153, 153));
         jLabel10.setText("Ngày hẹn trả");
-        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
+        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 153, 153));
         jLabel11.setText("Thủ thư xác nhận");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         librarianName.setEditable(false);
         librarianName.setBackground(new java.awt.Color(255, 255, 255));
-        librarianName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        librarianName.setBorder(null);
-        jPanel5.add(librarianName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 151, 30));
+        librarianName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        librarianName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+        librarianName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                librarianNameActionPerformed(evt);
+            }
+        });
+        jPanel5.add(librarianName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 151, 30));
 
         bookTitle.setEditable(false);
         bookTitle.setBackground(new java.awt.Color(255, 255, 255));
-        bookTitle.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        bookTitle.setBorder(null);
-        jPanel5.add(bookTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 151, 30));
+        bookTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bookTitle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+        bookTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookTitleActionPerformed(evt);
+            }
+        });
+        jPanel5.add(bookTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 151, 30));
 
         userName.setEditable(false);
         userName.setBackground(new java.awt.Color(255, 255, 255));
-        userName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        userName.setBorder(null);
-        jPanel5.add(userName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 151, 30));
+        userName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+        jPanel5.add(userName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 151, 30));
 
         dueDate.setBackground(new java.awt.Color(255, 255, 255));
         dueDate.setDateFormatString("yyyy-MM-dd");
-        dueDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jPanel5.add(dueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 151, 30));
+        dueDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jPanel5.add(dueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 290, 30));
 
         borrowDate.setBackground(new java.awt.Color(255, 255, 255));
         borrowDate.setDateFormatString("yyyy-MM-dd");
-        borrowDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jPanel5.add(borrowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 151, 30));
+        borrowDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jPanel5.add(borrowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 290, 30));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 153, 153));
         jLabel14.setText("Tiêu đề sách");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         bookPart.setEditable(false);
         bookPart.setBackground(new java.awt.Color(255, 255, 255));
-        bookPart.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        bookPart.setBorder(null);
-        jPanel5.add(bookPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 150, 30));
+        bookPart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bookPart.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
+        jPanel5.add(bookPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 150, 30));
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 340, 480));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 680, 480));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 680, 480));
 
         confirmReturnButton.setBackground(new java.awt.Color(0, 102, 102));
         confirmReturnButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -395,7 +415,7 @@ public class CreateReturn extends javax.swing.JFrame {
                 confirmReturnButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(confirmReturnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 620, 180, 50));
+        jPanel2.add(confirmReturnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 600, 180, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 784, 768));
 
@@ -616,7 +636,7 @@ public class CreateReturn extends javax.swing.JFrame {
                 c.prepareStatement("INSERT INTO returnn (bookdetail_id, user_id, librarian_id, returndate, bookstatus, fine) VALUES(?, ?, ?, DATE ?, ?, ?)");
                 returnInsertStatement.setInt(1, Integer.parseInt(BookDetailID));
                 returnInsertStatement.setInt(2, Integer.parseInt(UserID));
-                returnInsertStatement.setInt(3, 1);
+                returnInsertStatement.setInt(3, Admin.getId());
                 String pattern = "yyyy-MM-dd";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
                 String date = simpleDateFormat.format(new Date());
@@ -732,7 +752,8 @@ public class CreateReturn extends javax.swing.JFrame {
                                 lateDays < rbl.getReturnBookLateMax()) {
                                 //get the fine
                                 FineReturnLate = rbl.getFine(); 
-                                fineReturnLate.setText(Integer.toString(FineReturnLate) + " VND");
+                                NumberFormat nf = NumberFormat.getInstance(Locale.US);
+                                fineReturnLate.setText(nf.format(Integer.toString(FineReturnLate)) + " VNĐ");
                                 //get the note
                                 String returnBookLateNote = "Bị phạt vì trả sách muộn " + Long.toString(lateDays) + " ngày";
                                 note2.setText(returnBookLateNote);
@@ -762,7 +783,8 @@ public class CreateReturn extends javax.swing.JFrame {
                 && bookDamage < bdr.getBookDamageMax()) {
                 //get the fine
                 FineBookDamage = bdr.getFine();
-                fineBookDamage.setText(Integer.toString(FineBookDamage) + " VND");
+                NumberFormat nf = NumberFormat.getInstance(Locale.US);
+                fineBookDamage.setText(nf.format(Integer.toString(FineBookDamage)) + " VNĐ");
                 //get the note
                 String bookDamageNote = "Bị phạt vì làm hư hại sách " + Integer.toString(bookDamage) + " %";
                 note1.setText(bookDamageNote);
@@ -842,9 +864,13 @@ public class CreateReturn extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel10MouseExited
 
     private void librarianlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianlistMouseClicked
-        close();
-        LibrarianList ll = new LibrarianList();
-        ll.setVisible(true);
+         if (Admin.getLevel() == 1) {
+            close();
+            LibrarianList ll = new LibrarianList();
+            ll.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập vào phần này!");
+        }
     }//GEN-LAST:event_librarianlistMouseClicked
 
     private void jPanel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseEntered
@@ -872,6 +898,14 @@ public class CreateReturn extends javax.swing.JFrame {
         Color color = new Color(0,102,102);
         jPanel12.setBackground(color);
     }//GEN-LAST:event_jPanel12MouseExited
+
+    private void bookTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookTitleActionPerformed
+
+    private void librarianNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_librarianNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_librarianNameActionPerformed
     public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
