@@ -483,7 +483,7 @@ public class ReturnList extends javax.swing.JFrame {
                             librarian = l;
                         }
                     }
-                    librarianName = librarian.getFirstname() + librarian.getLastname();
+                    librarianName = librarian.getFirstname() + " " + librarian.getLastname();
                     //get date
                     returnDate = rs.getString(5);
                     //get bookstatus

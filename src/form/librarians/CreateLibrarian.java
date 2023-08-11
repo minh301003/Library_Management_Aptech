@@ -8,27 +8,20 @@ import form.books.BookList;
 import form.borrow.BorrowList;
 import form.dashboard.DashBoard;
 import static form.librarians.LibrarianList.getLibrarianList;
-import static form.login.Login.Admin;
 import form.returns.ReturnList;
 import form.users.UserList;
-import static form.users.UserList.getUserList;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import model.Librarian;
-import model.User;
 import utils.Database;
 import static utils.Database.connectDB;
 
@@ -321,7 +314,6 @@ public class CreateLibrarian extends javax.swing.JFrame {
         jLabel11.setText("Email");
         jPanel9.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        firstname.setBackground(new java.awt.Color(255, 255, 255));
         firstname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         firstname.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         jPanel9.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 210, 40));
@@ -347,6 +339,7 @@ public class CreateLibrarian extends javax.swing.JFrame {
         email.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 153)));
         jPanel9.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 500, 30));
 
+        level.setEditable(true);
         level.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         level.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1" }));
         jPanel9.add(level, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 110, 30));
@@ -523,51 +516,57 @@ public class CreateLibrarian extends javax.swing.JFrame {
         try { 
             Connection c = connectDB();
             List<Librarian> librarianList = getLibrarianList();
+            String FirstName = firstname.getText();
+            String LastName = lastname.getText();
             String UserName = username.getText();
             String Email = email.getText();
             String Phone = phone.getText();
+            String PassWord = new String(password.getPassword());
+            String Address = address.getText();
             String levelString = (String) level.getSelectedItem();
             int Level = Integer.parseInt(levelString);
-            boolean uniqueCheck = true;
-            for (Librarian lb : librarianList) {
-                if (lb.getEmail().equals(Email)) {
-                    uniqueCheck = false;
-                    JOptionPane.showMessageDialog(this, "Email này đã được đăng ký!");
-                } else if (lb.getUsername().equals(UserName)) {
-                    uniqueCheck = false;
-                    JOptionPane.showMessageDialog(this, "Tên đăng nhập này đã được đăng ký!");
+            if (UserName.isEmpty() || PassWord.isEmpty() || FirstName.isEmpty() || LastName.isEmpty()
+                || Email.isEmpty() || Phone.isEmpty() || Address.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Hãy điền đủ form thông tin!");
+            } else {
+                boolean uniqueCheck = true;
+                for (Librarian lb : librarianList) {
+                    if (lb.getEmail().equals(Email)) {
+                        uniqueCheck = false;
+                        JOptionPane.showMessageDialog(this, "Email này đã được đăng ký!");
+                    } else if (lb.getUsername().equals(UserName)) {
+                        uniqueCheck = false;
+                        JOptionPane.showMessageDialog(this, "Tên đăng nhập này đã được đăng ký!");
+                    }
                 }
+                if (uniqueCheck) {
+                    if (!isValidEmail(Email)) {
+                    JOptionPane.showMessageDialog(this, "Email không hợp lệ!");
+                    } else if (isValidPhoneNumber(Phone) == false) {
+                        JOptionPane.showMessageDialog(this, "Số điện thoại chỉ được gồm 10 kí tự số!");
+                    } else {
+                        PreparedStatement librarianInsert = c.prepareStatement("INSERT INTO librarian (firstname, lastname, username, password, email, phone, address, level) VALUES (?,?,?,?,?,?,?,?)");
+                        librarianInsert.setString(1, firstname.getText());
+                        librarianInsert.setString(2, lastname.getText());
+                        librarianInsert.setString(3, UserName);
+                        librarianInsert.setString(4, PassWord);
+                        librarianInsert.setString(5, Email);
+                        librarianInsert.setString(6, Phone);
+                        librarianInsert.setString(7, Address);
+                        librarianInsert.setInt(8, Level);
+                        librarianInsert.executeUpdate();
+                      //Refresh form and show successful alert
+                        JOptionPane.showMessageDialog(this, "Cấp tài khoản thành công!");
+                        firstname.setText("");
+                        lastname.setText("");
+                        username.setText("");
+                        password.setText("");
+                        email.setText("");
+                        phone.setText("");
+                        address.setText("");
+                    }
+                } 
             }
-            if (uniqueCheck) {
-                if (!isValidEmail(Email)) {
-                JOptionPane.showMessageDialog(this, "Email không hợp lệ!");
-                } else if (isValidPhoneNumber(Phone) == false) {
-                    JOptionPane.showMessageDialog(this, "Số điện thoại chỉ được gồm 10 kí tự số!");
-                } else {
-                    PreparedStatement librarianInsert = c.prepareStatement("INSERT INTO librarian (firstname, lastname, username, password, email, phone, address, level) VALUES (?,?,?,?,?,?,?,?)");
-                    librarianInsert.setString(1, firstname.getText());
-                    librarianInsert.setString(2, lastname.getText());
-                    librarianInsert.setString(3, UserName);
-                    librarianInsert.setString(4, new String(password.getPassword()));
-                    librarianInsert.setString(5, Email);
-                    librarianInsert.setString(6, Phone);
-                    librarianInsert.setString(7, address.getText());
-                    librarianInsert.setInt(8, Level);
-                    librarianInsert.executeUpdate();
-                  //Refresh form and show successful alert
-                    JOptionPane.showMessageDialog(this, "Cấp tài khoản thành công!");
-                    firstname.setText("");
-                    lastname.setText("");
-                    username.setText("");
-                    password.setText("");
-                    email.setText("");
-                    phone.setText("");
-                    address.setText("");
-                }
-            
-               
-                
-            } 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);  
         } 

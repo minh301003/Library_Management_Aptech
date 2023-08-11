@@ -8,12 +8,14 @@ import form.books.BookList;
 import form.borrow.BorrowList;
 import form.dashboard.DashBoard;
 import form.returns.ReturnList;
+import form.table.TableActionCellEditor;
+import form.table.TableActionCellRender;
+import form.table.TableActionEvent;
 import form.users.UserList;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,8 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.Librarian;
-import model.User;
 import utils.Database;
 import static utils.Database.connectDB;
 
@@ -37,9 +42,72 @@ public class LibrarianList extends javax.swing.JFrame {
      */
     public LibrarianList() {
         initComponents();
+        TableActionEvent event;
+        event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                String id = librariantable.getModel().getValueAt(row, 0).toString();
+                close(); 
+                EditLibrarian el = new EditLibrarian(id);
+                el.setVisible(true);              
+            }
+
+            @Override
+            public void onView(int row) {
+                String id = librariantable.getModel().getValueAt(row, 0).toString();
+                close(); 
+                ViewLibrarian vb = new ViewLibrarian(id);
+                vb.setVisible(true); 
+            }
+
+            @Override
+            public void onDelete(int row) {
+                String id = librariantable.getModel().getValueAt(row, 0).toString();
+                if (librariantable.isEditing()) {
+                    librariantable.getCellEditor().stopCellEditing();
+                }    
+                int confirmDelete = JOptionPane.showConfirmDialog(null, 
+                "Bạn chắc chắn muốn xóa nhân viên này?", "Xác nhận",JOptionPane.YES_NO_OPTION);
+                if (confirmDelete == 0) {
+                    DefaultTableModel model = (DefaultTableModel) librariantable.getModel();
+                    model.removeRow(row);
+                    deleleLibrarianByID(id);
+                }
+                
+            }
+        };
+        librariantable.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
+        librariantable.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
+        fetchLibrarian();
+    }
+    private void deleleLibrarianByID(String id) {
+        try {
+            Connection c = connectDB();
+            c.createStatement().executeUpdate("DELETE FROM librarian WHERE id = " + id);
+            JOptionPane.showMessageDialog(this, "Xóa nhân viên thành công!");
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void fetchLibrarian() {
+        List<Librarian> librarianList = getLibrarianList();
+        DefaultTableModel model = (DefaultTableModel) librariantable.getModel();
+        for (Librarian lb : librarianList) {
+            String ID;
+            String fullName;
+            String level;
+            if (lb.getLevel() == 0) {
+                int id = lb.getId();
+                ID = String.valueOf(id);
+                fullName = lb.getFirstname() + " " + lb.getLastname();
+                level = "Nhân viên";
+                String[] row = {ID, fullName, level};
+                model.addRow(row);
+            }
+        }
     }
     
-     public static List<Librarian> getLibrarianList(){
+    public static List<Librarian> getLibrarianList(){
         List<Librarian> ls = new ArrayList<>();
         try{
            Connection c = connectDB();
@@ -83,6 +151,9 @@ public class LibrarianList extends javax.swing.JFrame {
         createLibrarianButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        searchfield = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        librariantable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -272,17 +343,47 @@ public class LibrarianList extends javax.swing.JFrame {
                 createLibrarianButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(createLibrarianButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 180, 50));
+        jPanel2.add(createLibrarianButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 180, 50));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Quản lý nhân viên");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tìm kiếm");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
+
+        searchfield.setBorder(null);
+        searchfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchfieldKeyReleased(evt);
+            }
+        });
+        jPanel2.add(searchfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 390, 30));
+
+        librariantable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Họ tên", "Chức vụ", "Hành động"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        librariantable.setRowHeight(40);
+        librariantable.setSelectionBackground(new java.awt.Color(204, 255, 204));
+        jScrollPane1.setViewportView(librariantable);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 690, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 784, 768));
 
@@ -406,6 +507,17 @@ public class LibrarianList extends javax.swing.JFrame {
         cb.setVisible(true);     
     }//GEN-LAST:event_createLibrarianButtonActionPerformed
 
+    private void searchfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchfieldKeyReleased
+        // TODO add your handling code here:
+        String searchKey = searchfield.getText();
+        search(searchKey);
+    }//GEN-LAST:event_searchfieldKeyReleased
+    private void search(String key) {
+        DefaultTableModel model = (DefaultTableModel) librariantable.getModel();
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(model);
+        librariantable.setRowSorter(trs);
+        trs.setRowFilter(RowFilter.regexFilter(key));
+    }
     /**
      * @param args the command line arguments
      */
@@ -458,8 +570,11 @@ public class LibrarianList extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel librarianlist;
+    private javax.swing.JTable librariantable;
     private javax.swing.JLabel returnlist;
+    private javax.swing.JTextField searchfield;
     private javax.swing.JLabel userlist;
     // End of variables declaration//GEN-END:variables
 }

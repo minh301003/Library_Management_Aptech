@@ -374,12 +374,12 @@ public class CreateReturn extends javax.swing.JFrame {
 
         dueDate.setBackground(new java.awt.Color(255, 255, 255));
         dueDate.setDateFormatString("yyyy-MM-dd");
-        dueDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        dueDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel5.add(dueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 290, 30));
 
         borrowDate.setBackground(new java.awt.Color(255, 255, 255));
         borrowDate.setDateFormatString("yyyy-MM-dd");
-        borrowDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        borrowDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel5.add(borrowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 290, 30));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -753,7 +753,7 @@ public class CreateReturn extends javax.swing.JFrame {
                                 //get the fine
                                 FineReturnLate = rbl.getFine(); 
                                 NumberFormat nf = NumberFormat.getInstance(Locale.US);
-                                fineReturnLate.setText(nf.format(Integer.toString(FineReturnLate)) + " VNĐ");
+                                fineReturnLate.setText(nf.format(FineReturnLate) + " VNĐ");
                                 //get the note
                                 String returnBookLateNote = "Bị phạt vì trả sách muộn " + Long.toString(lateDays) + " ngày";
                                 note2.setText(returnBookLateNote);
@@ -784,7 +784,7 @@ public class CreateReturn extends javax.swing.JFrame {
                 //get the fine
                 FineBookDamage = bdr.getFine();
                 NumberFormat nf = NumberFormat.getInstance(Locale.US);
-                fineBookDamage.setText(nf.format(Integer.toString(FineBookDamage)) + " VNĐ");
+                fineBookDamage.setText(nf.format(FineBookDamage) + " VNĐ");
                 //get the note
                 String bookDamageNote = "Bị phạt vì làm hư hại sách " + Integer.toString(bookDamage) + " %";
                 note1.setText(bookDamageNote);

@@ -614,57 +614,61 @@ public class CreateBorrow extends javax.swing.JFrame {
             Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
             String userEmail = email.getText();
             String userPhone = phone.getText();
-            if (!isValidEmail(userEmail)) {
-                JOptionPane.showMessageDialog(this, "Email không hợp lệ!");
-            } else if(isValidPhoneNumber(userPhone) == false) {
-                JOptionPane.showMessageDialog(this, "Số điện thoại chỉ được gồm 10 kí tự số!");
+            if (name.getText().isEmpty() || userPhone.isEmpty() || userEmail.isEmpty() || ((JTextField)duedate.getDateEditor().getUiComponent()).getText().isEmpty()) {
+              JOptionPane.showMessageDialog(this, "Hãy điền đủ form thông tin!");
             } else {
-                //Insert into db
-                //Check if user has been inserted into db
-                List<User> userList = getUserList();
-                boolean check = false;
-                User user = null;
-                for (User u : userList) {
-                    if (u.getName().equals(name.getText())){
-                        check = true;
-                        user = u;
-                    }
-                }
-                if (!check){
-                   PreparedStatement userInsert = c.prepareStatement("INSERT INTO user (name, email, phone) VALUES(?, ?, ?)");
-                   userInsert.setString(1, name.getText());
-                   userInsert.setString(2, userEmail);
-                   userInsert.setString(3, userPhone);
-                   userInsert.executeUpdate();
+                if (!isValidEmail(userEmail)) {
+                    JOptionPane.showMessageDialog(this, "Email không hợp lệ!");
+                } else if(isValidPhoneNumber(userPhone) == false) {
+                    JOptionPane.showMessageDialog(this, "Số điện thoại chỉ được gồm 10 kí tự số!");
                 } else {
-                   PreparedStatement userUpdate = c.prepareStatement("UPDATE user set email = ?, phone= ? WHERE id = ?");
-                   userUpdate.setString(1, userEmail);
-                   userUpdate.setString(2, userPhone);
-                   userUpdate.setInt(3, user.getId());
-                   userUpdate.executeUpdate();
+                    //Insert into db
+                    //Check if user has been inserted into db
+                    List<User> userList = getUserList();
+                    boolean check = false;
+                    User user = null;
+                    for (User u : userList) {
+                        if (u.getName().equals(name.getText())){
+                            check = true;
+                            user = u;
+                        }
+                    }
+                    if (!check){
+                       PreparedStatement userInsert = c.prepareStatement("INSERT INTO user (name, email, phone) VALUES(?, ?, ?)");
+                       userInsert.setString(1, name.getText());
+                       userInsert.setString(2, userEmail);
+                       userInsert.setString(3, userPhone);
+                       userInsert.executeUpdate();
+                    } else {
+                       PreparedStatement userUpdate = c.prepareStatement("UPDATE user set email = ?, phone= ? WHERE id = ?");
+                       userUpdate.setString(1, userEmail);
+                       userUpdate.setString(2, userPhone);
+                       userUpdate.setInt(3, user.getId());
+                       userUpdate.executeUpdate();
+                    }
+                    //Insert into borrow table
+                    PreparedStatement borrowInsert = c.prepareStatement("INSERT INTO borrow (bookdetail_id, user_id, librarian_id, borrowdate, duedate) VALUES(?, ?, ?, DATE ?, DATE ?)");
+                    borrowInsert.setInt(1, Integer.parseInt(BookDetailID));
+                    PreparedStatement getUserId = c.prepareStatement("SELECT id FROM user WHERE name = ?");
+                    getUserId.setString(1, name.getText());
+                    ResultSet getUserIdKey = getUserId.executeQuery();
+                    int userID = 0;
+                    while (getUserIdKey.next()) {
+                       userID = getUserIdKey.getInt("id");
+                    }
+                    borrowInsert.setInt(2, userID);
+                    borrowInsert.setInt(3, Admin.getId());
+                    borrowInsert.setString(4, ((JTextField)borrowdate.getDateEditor().getUiComponent()).getText());
+                    borrowInsert.setString(5, ((JTextField)duedate.getDateEditor().getUiComponent()).getText());
+                    borrowInsert.executeUpdate();
+
+                    //Refresh form and show successful alert
+                    JOptionPane.showMessageDialog(this, "Ghi nhận phiếu mượn thành công!");
+                    name.setText("");
+                    email.setText("");
+                    phone.setText("");
+
                 }
-                //Insert into borrow table
-                PreparedStatement borrowInsert = c.prepareStatement("INSERT INTO borrow (bookdetail_id, user_id, librarian_id, borrowdate, duedate) VALUES(?, ?, ?, DATE ?, DATE ?)");
-                borrowInsert.setInt(1, Integer.parseInt(BookDetailID));
-                PreparedStatement getUserId = c.prepareStatement("SELECT id FROM user WHERE name = ?");
-                getUserId.setString(1, name.getText());
-                ResultSet getUserIdKey = getUserId.executeQuery();
-                int userID = 0;
-                while (getUserIdKey.next()) {
-                   userID = getUserIdKey.getInt("id");
-                }
-                borrowInsert.setInt(2, userID);
-                borrowInsert.setInt(3, Admin.getId());
-                borrowInsert.setString(4, ((JTextField)borrowdate.getDateEditor().getUiComponent()).getText());
-                borrowInsert.setString(5, ((JTextField)duedate.getDateEditor().getUiComponent()).getText());
-                borrowInsert.executeUpdate();
-                
-                //Refresh form and show successful alert
-                JOptionPane.showMessageDialog(this, "Ghi nhận phiếu mượn thành công!");
-                name.setText("");
-                email.setText("");
-                phone.setText("");
-               
             }
                     
         } catch (ClassNotFoundException | SQLException ex) {

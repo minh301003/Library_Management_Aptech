@@ -65,9 +65,14 @@ public class BookList extends javax.swing.JFrame {
                 if (booktitlelist.isEditing()) {
                     booktitlelist.getCellEditor().stopCellEditing();
                 }
-                DefaultTableModel model = (DefaultTableModel) booktitlelist.getModel();
-                model.removeRow(row);
-                deleleBookTitleByID(id);
+                
+                int confirmDelete = JOptionPane.showConfirmDialog(null, 
+                "Bạn chắc chắn muốn sách này?", "Xác nhận",JOptionPane.YES_NO_OPTION);
+                if (confirmDelete == 0) {
+                    DefaultTableModel model = (DefaultTableModel) booktitlelist.getModel();
+                    model.removeRow(row);
+                    deleleBookTitleByID(id);
+                }
                 
             }
         };
@@ -370,11 +375,10 @@ public class BookList extends javax.swing.JFrame {
     }
     private void deleleBookTitleByID(String id) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_2", "root", "");
+            Connection c = connectDB();
             c.createStatement().executeUpdate("DELETE FROM booktitle WHERE id = " + id);
             JOptionPane.showMessageDialog(this, "Xóa sách thành công!");
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(BookList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

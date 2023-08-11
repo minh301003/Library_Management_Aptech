@@ -447,7 +447,10 @@ public class CreateBook extends javax.swing.JFrame {
             int parts = (Integer) bookpart.getValue();
             //Get quantity
             int Quantity = (Integer) quantity.getValue();
-            //Connect to db
+            if (bookTitle.isEmpty() || publisher.isEmpty() || publishedYear.isEmpty() || authorValue.isEmpty() || selectedIndices.length==0 ){
+                JOptionPane.showMessageDialog(this, "Hãy điền đủ form thông tin!");
+            } else {
+              //Connect to db
             Connection conn = connectDB();
             //Insert into booktitle table
             String query = "INSERT INTO booktitle (booktitle, publishedyear, publisher_id) VALUES(? , ?, ?)";
@@ -554,6 +557,8 @@ public class CreateBook extends javax.swing.JFrame {
             genreList.clearSelection();
             bookpart.setValue(1);
             quantity.setValue(1);
+            }
+            
         
         } catch (SQLException ex) {
             Logger.getLogger(CreateBook.class.getName()).log(Level.SEVERE, null, ex);
